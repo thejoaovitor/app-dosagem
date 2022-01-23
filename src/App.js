@@ -434,7 +434,7 @@ function App() {
               </fieldset>
             </Card>
             <Button variant="primary" type="submit" onClick={calculateResult}>
-              Calcular ->
+              Calcular
             </Button>
           </Form>
         </Container>
