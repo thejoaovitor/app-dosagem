@@ -9,12 +9,21 @@ import {
   Container,
   InputGroup,
   Card,
-  Navbar,
+  Navbar, 
+  Badge
 } from "react-bootstrap";
+import Accordion from 'react-bootstrap/Accordion'
 import React, { useState } from "react";
 
 function App() {
+  
+  const [y, sety] = useState(null);
+
+
+
   const calculateResult = () => {
+    setW(15)
+
     const t1 = +document.getElementById("t1").value;
     const ac1 = +document.getElementById("ac1").value;
     const fcj1 = +document.getElementById("fcj1").value;
@@ -42,12 +51,14 @@ function App() {
     console.log(x);
 
     const y = Math.pow(ac1, 2);
+    sety(y)
 
     // const y =
     //   2 * (Math.pow(ac1, 2) + Math.pow(ac2, 2) + Math.pow(ac3, 2)) -
     //   2(ac1 * ac2 + ac1 * ac3 + ac2 * ac3);
 
     console.log("Y: %d", y);
+    
 
     const value = t1 + ac1 + fcj1 + c1;
     console.log(value);
@@ -94,7 +105,7 @@ function App() {
             <Navbar.Brand>Calculadora de Dosagem de Concreto</Navbar.Brand>
           </Container>
         </Navbar>
-        <Container className="my-5">
+        <Container className="my-5" style={{maxWidth: 960}}>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row>
               <h3>Ensaio 1</h3>
@@ -434,9 +445,26 @@ function App() {
               </fieldset>
             </Card>
             <Button variant="primary" type="submit" onClick={calculateResult}>
-              Calcular
+              Calcular->
             </Button>
           </Form>
+          
+          <Badge bg="secondary"> New</Badge>
+          <Card style={{ width: '18rem' }}>
+  <Card.Body>
+    <Card.Title>Resultado</Card.Title>
+    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+    <Card.Text>
+      Valor de Y é {y} 
+    </Card.Text>
+    <Card.Link href="#">Card Link</Card.Link>
+    <Card.Link href="#">Another Link</Card.Link>
+  </Card.Body>
+</Card>
+          
+
+          
+
         </Container>
       </div>
     </div>
