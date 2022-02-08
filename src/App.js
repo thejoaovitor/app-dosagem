@@ -22,7 +22,6 @@ function App() {
 
 
   const calculateResult = () => {
-    setW(15)
 
     const t1 = +document.getElementById("t1").value;
     const ac1 = +document.getElementById("ac1").value;
@@ -167,7 +166,7 @@ function App() {
 
               <Col xs={6} md={3}>
                 <Form.Group controlId="c1">
-                  <Form.Label>Consumo</Form.Label>
+                  <Form.Label>Massa Específica</Form.Label>
                   <InputGroup>
                     <Form.Control
                       placeholder="0.0"
@@ -178,7 +177,7 @@ function App() {
                       step="any"
                       max="1000"
                     />
-                    <InputGroup.Text>kg/m³</InputGroup.Text>
+                    <InputGroup.Text>kg/dm³</InputGroup.Text>
                   </InputGroup>
                 </Form.Group>
               </Col>
