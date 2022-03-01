@@ -41,10 +41,16 @@ function App() {
   
   var [ac1, setAc1] = useState(0);
 	var [fcj1, setFcj1] = useState(0);
+  var [m1, setM1] = useState(0);
+  var [c1, setC1] = useState(0);
 	var [ac2, setAc2] = useState(0);
 	var [fcj2, setFcj2] = useState(0);
+  var [m2, setM2] = useState(0);
+  var [c2, setC2] = useState(0);
 	var [ac3, setAc3] = useState(0);
 	var [fcj3, setFcj3] = useState(0);
+  var [m3, setM3] = useState(0);
+  var [c3, setC3] = useState(0);
 	
 	var [sd, setSd] = useState(0); //Desvio padrão relacionado à condição de preparo de concreto
   var [ca, setCa] = useState(0);
@@ -125,42 +131,41 @@ function App() {
    console.log({sd,ca,tc,acMin,fckMin,ccMin})
   }
 
-	function finalCalculation() {
-		if (fck<fckMin){
-			fcjFinal = fckMin + 1.65 * sd
-		} else {
-			fcjFinal = fck + 1.65 * sd
-		}
 
-		acFinal = log
-	}
-
-  
 
 
   const calculateResult = () => {
 
-    const m1 = +document.getElementById("m1").value;
+    m1 = +document.getElementById("m1").value;
     ac1 = +document.getElementById("ac1").value;
     fcj1 = +document.getElementById("fcj1").value;
     const me1 = +document.getElementById("me1").value;
 
-    const m2 = +document.getElementById("m2").value;
+    m2 = +document.getElementById("m2").value;
     ac2 = +document.getElementById("ac2").value;
     fcj2 = +document.getElementById("fcj2").value;
     const me2 = +document.getElementById("me2").value;
 
-    const m3 = +document.getElementById("m3").value;
+    m3 = +document.getElementById("m3").value;
     ac3 = +document.getElementById("ac3").value;
     fcj3 = +document.getElementById("fcj3").value;
     const me3 = +document.getElementById("me3").value;
 
 		setAc1(ac1)
 		setFcj1(fcj1)
+    setM1(m1)
+    setC1((me1*1000)/(1+m1+ac1))
+
+
 		setAc2(ac2)
 		setFcj2(fcj2)
+    setM2(m2)
+    setC2((me2*1000)/(1+m2+ac2))
+
 		setAc3(ac3)
 		setFcj3(fcj3)
+    setM3(m3)
+    setC3((me3*1000)/(1+m3+ac3))
 
     ta = +document.getElementById("ta").value;
     fck = +document.getElementById("fck").value;
@@ -251,14 +256,91 @@ function App() {
     console.log(validated);
   };
 
-	const optionsAbrams = {
+  const optionsLyse = {
 		responsive: true,
+    maintainAspectRatio: false,
 		scales: {
 			x:{
-				beginAtZero: true
+				beginAtZero: true,
+        title: {
+          display: true,
+          text: 'A/C (Kg/Kg)'
+        }
 			},
 			y:{
-				beginAtZero: true
+				beginAtZero: true,
+        reverse: true,
+        position: 'right',
+        title: {
+          display: true,
+          text: 'm (Kg)'
+        }
+			}
+		},
+		plugins: {
+			title: {
+				display: true,
+				text: 'Lei de Lyse',
+        position: 'bottom'
+			},
+      legend: {
+        display: false,
+      }
+		},
+	};
+
+  const optionsKirilos = {
+		responsive: true,
+    maintainAspectRatio: false,
+		scales: {
+			x:{
+				beginAtZero: true,
+        reverse: true,
+        title: {
+          display: true,
+          text: 'Consumo (Kg/m³)'
+        }
+			},
+			y:{
+				beginAtZero: true,
+        reverse: true,
+        title: {
+          display: true,
+          text: 'm (Kg)'
+        }
+			}
+		},
+		plugins: {
+			title: {
+				display: true,
+				text: 'Lei de Kirilos',
+        position: 'bottom'
+			},
+      legend: {
+        display: false,
+      }
+		},
+	};
+
+	const optionsAbrams = {
+		responsive: true,
+    maintainAspectRatio: false,
+		scales: {
+			x:{
+				beginAtZero: true,
+        position: 'top',
+        title: {
+          display: true,
+          text: 'A/C (Kg/Kg)'
+        }
+			},
+			y:{
+				beginAtZero: true,
+        position: 'right',
+        title: {
+          display: true,
+          text: 'fcj (MPa)'
+        }
 			}
 		},
 		plugins: {
@@ -266,17 +348,43 @@ function App() {
 				display: true,
 				text: 'Lei de Abrams',
 			},
+      legend: {
+        display: false,
+      }
 		},
 	};
-
-	//const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
   const dataAbrams = {
 		datasets: [
 			{
-				label: 'Dataset 1',
+				//label: 'Dataset 1',
 				data: [{ x: ac1, y: fcj1 }, { x: ac2, y: fcj2 }, { x: ac3, y: fcj3 }],
-				//data: [{ x: 0.47, y: 45.1 }, { x: 0.56, y: 36.4 }, { x: 0.65, y: 29.6 }],
+				borderColor: 'rgb(255, 99, 132)',
+				backgroundColor: 'rgba(255, 99, 132, 0.5)',
+				showLine: true,
+				tension: 0.4
+			}
+		],
+	};
+
+  const dataKirilos = {
+		datasets: [
+			{
+				label: 'Dataset 1',
+				data: [{ x: c1, y: m1 }, { x: c2, y: m2 }, { x: c3, y: m3 }],
+				borderColor: 'rgb(255, 99, 132)',
+				backgroundColor: 'rgba(255, 99, 132, 0.5)',
+				showLine: true,
+				tension: 0.4
+			}
+		],
+	};
+
+  const dataLyse = {
+		datasets: [
+			{
+				label: 'Dataset 1',
+				data: [{ x: ac1, y: m1 }, { x: ac2, y: m2 }, { x: ac3, y: m3 }],
 				borderColor: 'rgb(255, 99, 132)',
 				backgroundColor: 'rgba(255, 99, 132, 0.5)',
 				showLine: true,
@@ -668,7 +776,19 @@ function App() {
     <Card.Link href="#">Another Link</Card.Link>
   </Card.Body>
 </Card>
-<Scatter options={optionsAbrams} data={dataAbrams} />;
+<Row> 
+<Col xs={6}></Col>
+<Col xs={6}>
+  <Scatter options={optionsAbrams} data={dataAbrams} /> </Col>
+</Row>
+<Row>
+<Col xs={6}> 
+<Scatter options={optionsKirilos} data={dataKirilos} />
+</Col>
+<Col xs={6}> 
+<Scatter options={optionsLyse} data={dataLyse} />
+</Col>
+</Row>
           
 
         </Container>
