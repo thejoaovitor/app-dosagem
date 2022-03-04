@@ -9,8 +9,8 @@ import {
   Container,
   InputGroup,
   Card,
-  Navbar, 
-  Badge
+  Navbar,
+  Badge,
 } from "react-bootstrap";
 //import Accordion from 'react-bootstrap/Accordion'
 import React, { useEffect, useState } from "react";
@@ -23,9 +23,8 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Line, Scatter } from 'react-chartjs-2';
-
+} from "chart.js";
+import { Line, Scatter } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -38,104 +37,107 @@ ChartJS.register(
 );
 
 function App() {
-  
   var [ac1, setAc1] = useState(0);
-	var [fcj1, setFcj1] = useState(0);
+  var [fcj1, setFcj1] = useState(0);
   var [m1, setM1] = useState(0);
   var [c1, setC1] = useState(0);
-	var [ac2, setAc2] = useState(0);
-	var [fcj2, setFcj2] = useState(0);
+  var [ac2, setAc2] = useState(0);
+  var [fcj2, setFcj2] = useState(0);
   var [m2, setM2] = useState(0);
   var [c2, setC2] = useState(0);
-	var [ac3, setAc3] = useState(0);
-	var [fcj3, setFcj3] = useState(0);
+  var [ac3, setAc3] = useState(0);
+  var [fcj3, setFcj3] = useState(0);
   var [m3, setM3] = useState(0);
   var [c3, setC3] = useState(0);
-	
-	var [sd, setSd] = useState(0); //Desvio padrão relacionado à condição de preparo de concreto
+
+  var [sd, setSd] = useState(0); //Desvio padrão relacionado à condição de preparo de concreto
   var [ca, setCa] = useState(0);
   var [tc, setTc] = useState(0);
-	var [ta, setTa] = useState(0);
-	var [fck, setFck] = useState(0);
+  var [ta, setTa] = useState(0);
+  var [fck, setFck] = useState(0);
   var [acMin, setAcMin] = useState(0);
   var [fckMin, setFckMin] = useState(0);
   var [ccMin, setCcMin] = useState(0);
-	var [fcjFinal, setFcjFinal] = useState(0);
-	var [acFinal, setAcFinal] = useState(0);
-	var [mFinal, setMFinal] = useState(0);
-	var [areiaFinal, setAreiaFinal] = useState(0);
-	var [cFinal, setCFinal] = useState(0);
-	var [bFinal, setBFinal] = useState(0);
-  
+  var [fcjFinal, setFcjFinal] = useState(0);
+  var [acFinal, setAcFinal] = useState(0);
+  var [mFinal, setMFinal] = useState(0);
+  var [areiaFinal, setAreiaFinal] = useState(0);
+  var [cFinal, setCFinal] = useState(0);
+  var [bFinal, setBFinal] = useState(0);
+
+  const [isShowingResult, setIsShowingResult] = useState(false);
+
+  useEffect(() => {
+    if (isShowingResult === true){
+      document.getElementById("result").scrollIntoView()
+    }
+}, [isShowingResult]);// This is be executed when the state changes
+
   const AnswerChangeHandler = (e) => {
-    if (e.target.name === "sd"){
-			sd = parseFloat(e.target.value)
-			setSd(parseFloat(e.target.value));
-    console.log(sd);
+    if (e.target.name === "sd") {
+      sd = parseFloat(e.target.value);
+      setSd(parseFloat(e.target.value));
+      console.log(sd);
     }
-    if (e.target.name === "ca"){
-    	ca = parseInt(e.target.value)
-			setCa(parseInt(e.target.value))
-     console.log(ca); 
+    if (e.target.name === "ca") {
+      ca = parseInt(e.target.value);
+      setCa(parseInt(e.target.value));
+      console.log(ca);
     }
-		if (e.target.name === "tc"){
-			tc = e.target.value
-			setTc(e.target.value);
-		console.log(tc);
-		}
+    if (e.target.name === "tc") {
+      tc = e.target.value;
+      setTc(e.target.value);
+      console.log(tc);
+    }
 
     setMinimumValues();
   };
 
   function setMinimumValues() {
-      if (tc === "CP"){
-        if (ca === 1){
-          setAcMin(0.6);
-          setFckMin(25);
-          setCcMin(260);
-        } else if (ca === 2){
-         setAcMin(0.55)
-         setFckMin(30)
-         setCcMin(280)
-       } else if (ca === 3){
-         setAcMin(0.5)
-         setFckMin(35)
-         setCcMin(320)
-       } else if (ca === 4){
-         setAcMin(0.45)
-         setFckMin(40)
-         setCcMin(360)
-       }
+    if (tc === "CP") {
+      if (ca === 1) {
+        setAcMin(0.6);
+        setFckMin(25);
+        setCcMin(260);
+      } else if (ca === 2) {
+        setAcMin(0.55);
+        setFckMin(30);
+        setCcMin(280);
+      } else if (ca === 3) {
+        setAcMin(0.5);
+        setFckMin(35);
+        setCcMin(320);
+      } else if (ca === 4) {
+        setAcMin(0.45);
+        setFckMin(40);
+        setCcMin(360);
       }
-  
-      if (tc === "CA"){
-       if (ca === 1){
-         setAcMin(0.65)
-         setFckMin(20)
-         setCcMin(260)
-       } else if (ca === 2){
-        setAcMin(0.6)
-        setFckMin(25)
-        setCcMin(280)
-      } else if (ca === 3){
-        setAcMin(0.55)
-        setFckMin(30)
-        setCcMin(320)
-      } else if (ca === 4){
-        setAcMin(0.45)
-        setFckMin(40)
-        setCcMin(360)
-      }
-     }
+    }
 
-   console.log({sd,ca,tc,acMin,fckMin,ccMin})
+    if (tc === "CA") {
+      if (ca === 1) {
+        setAcMin(0.65);
+        setFckMin(20);
+        setCcMin(260);
+      } else if (ca === 2) {
+        setAcMin(0.6);
+        setFckMin(25);
+        setCcMin(280);
+      } else if (ca === 3) {
+        setAcMin(0.55);
+        setFckMin(30);
+        setCcMin(320);
+      } else if (ca === 4) {
+        setAcMin(0.45);
+        setFckMin(40);
+        setCcMin(360);
+      }
+    }
+
+    console.log({ sd, ca, tc, acMin, fckMin, ccMin });
   }
 
-
-
-
-  const calculateResult = () => {
-
+  function calculateResult() {
     m1 = +document.getElementById("m1").value;
     ac1 = +document.getElementById("ac1").value;
     fcj1 = +document.getElementById("fcj1").value;
@@ -151,85 +153,106 @@ function App() {
     fcj3 = +document.getElementById("fcj3").value;
     const me3 = +document.getElementById("me3").value;
 
-		setAc1(ac1)
-		setFcj1(fcj1)
-    setM1(m1)
-    setC1((me1*1000)/(1+m1+ac1))
+    setAc1(ac1);
+    setFcj1(fcj1);
+    setM1(m1);
+    setC1((me1 * 1000) / (1 + m1 + ac1));
 
+    setAc2(ac2);
+    setFcj2(fcj2);
+    setM2(m2);
+    setC2((me2 * 1000) / (1 + m2 + ac2));
 
-		setAc2(ac2)
-		setFcj2(fcj2)
-    setM2(m2)
-    setC2((me2*1000)/(1+m2+ac2))
-
-		setAc3(ac3)
-		setFcj3(fcj3)
-    setM3(m3)
-    setC3((me3*1000)/(1+m3+ac3))
+    setAc3(ac3);
+    setFcj3(fcj3);
+    setM3(m3);
+    setC3((me3 * 1000) / (1 + m3 + ac3));
 
     ta = +document.getElementById("ta").value;
     fck = +document.getElementById("fck").value;
 
-    console.log({ta,fck,sd})
+    console.log({ ta, fck, sd });
 
     const x =
       log(fcj1, 10) * (2 * ac1 - ac2 - ac3) +
       log(fcj2, 10) * (2 * ac2 - ac1 - ac3) +
       log(fcj3, 10) * (2 * ac3 - ac1 - ac2);
-    
-    const y = 2*(Math.pow(ac1, 2) +
-    Math.pow(ac2, 2) +
-    Math.pow(ac3, 2)) -
-    2*(ac1 * ac2 + ac1 * ac3 + ac2 * ac3);
-    
-    const b = x/y;
-    const k1 = Math.pow(10,(1/3*(log(fcj1,10)+log(fcj2,10)+log(fcj3,10)-(b*(ac1+ac2+ac3)))))
-    const k2 = Math.pow(10,-b)
-    const k4 = ((m1*ac1+m2*ac2+m3*ac3)-(m2*(ac1+ac2+ac3)))/
-    ((Math.pow(ac1,2))+(Math.pow(ac2,2))+(Math.pow(ac3,2))-
-    (Math.pow((ac1+ac2+ac3),2)/3));
 
-    const c1 = (me1*1000)/(1+m1+ac1);
-    const c2 = (me2*1000)/(1+m2+ac2);
-    const c3 = (me3*1000)/(1+m3+ac3);
-    
-    const k6 = (1000*3*(m1/c1+m2/c2+m3/c3)-1000*(1/c1+1/c2+1/c3)*(m1+m2+m3))/
-    (3*(Math.pow(m1,2)+Math.pow(m2,2)+Math.pow(m3,2))-Math.pow(m1+m2+m3,2));
-    const k5 = ((1000*(1/c1+1/c2+1/c3))-(k6*(m1+m2+m3)))/3;
-    const k3 = m2 - k4*(ac1+ac2+ac3)/3
+    const y =
+      2 * (Math.pow(ac1, 2) + Math.pow(ac2, 2) + Math.pow(ac3, 2)) -
+      2 * (ac1 * ac2 + ac1 * ac3 + ac2 * ac3);
 
-		if (fck<fckMin){
-			fcjFinal = fckMin + 1.65 * sd
-		} else {
-			fcjFinal = fck + 1.65 * sd
-		}
+    const b = x / y;
+    const k1 = Math.pow(
+      10,
+      (1 / 3) *
+        (log(fcj1, 10) + log(fcj2, 10) + log(fcj3, 10) - b * (ac1 + ac2 + ac3))
+    );
+    const k2 = Math.pow(10, -b);
+    const k4 =
+      (m1 * ac1 + m2 * ac2 + m3 * ac3 - m2 * (ac1 + ac2 + ac3)) /
+      (Math.pow(ac1, 2) +
+        Math.pow(ac2, 2) +
+        Math.pow(ac3, 2) -
+        Math.pow(ac1 + ac2 + ac3, 2) / 3);
 
-		acFinal = (log(k1,10)-log(fcjFinal,10))/log(k2,10)
-		
-		
+    const c1 = (me1 * 1000) / (1 + m1 + ac1);
+    const c2 = (me2 * 1000) / (1 + m2 + ac2);
+    const c3 = (me3 * 1000) / (1 + m3 + ac3);
 
-		mFinal = k3 + (acFinal*k4)
+    const k6 =
+      (1000 * 3 * (m1 / c1 + m2 / c2 + m3 / c3) -
+        1000 * (1 / c1 + 1 / c2 + 1 / c3) * (m1 + m2 + m3)) /
+      (3 * (Math.pow(m1, 2) + Math.pow(m2, 2) + Math.pow(m3, 2)) -
+        Math.pow(m1 + m2 + m3, 2));
+    const k5 = (1000 * (1 / c1 + 1 / c2 + 1 / c3) - k6 * (m1 + m2 + m3)) / 3;
+    const k3 = m2 - (k4 * (ac1 + ac2 + ac3)) / 3;
 
-		if (acFinal>acMin){ //atenção aqui, essa validação ocorre antes ou depois do calculo do mFinal?
-			acFinal = acMin
-		}
+    if (fck < fckMin) {
+      fcjFinal = fckMin + 1.65 * sd;
+    } else {
+      fcjFinal = fck + 1.65 * sd;
+    }
 
+    acFinal = (log(k1, 10) - log(fcjFinal, 10)) / log(k2, 10);
 
-		areiaFinal = (ta*(1+mFinal)/100)-1
-		cFinal = 1000/(k5+(k6*mFinal))
-		if (cFinal<ccMin){
-			cFinal = ccMin
-		}
+    mFinal = k3 + acFinal * k4;
 
-		bFinal = mFinal-areiaFinal
-		
-		console.log( {x,y,b,k1,k2,k3,k4,k5,k6,fcjFinal,acFinal,mFinal,areiaFinal,cFinal} );
-		console.log( {areiaFinal,bFinal,acFinal} );
+    if (acFinal > acMin) {
+      //atenção aqui, essa validação ocorre antes ou depois do calculo do mFinal?
+      acFinal = acMin;
+    }
 
-		setAreiaFinal(areiaFinal)
-		setBFinal(bFinal)
-		setAcFinal(acFinal)
-    
+    areiaFinal = (ta * (1 + mFinal)) / 100 - 1;
+    cFinal = 1000 / (k5 + k6 * mFinal);
+    if (cFinal < ccMin) {
+      cFinal = ccMin;
+    }
+
+    bFinal = mFinal - areiaFinal;
+
+    console.log({
+      x,
+      y,
+      b,
+      k1,
+      k2,
+      k3,
+      k4,
+      k5,
+      k6,
+      fcjFinal,
+      acFinal,
+      mFinal,
+      areiaFinal,
+      cFinal,
+    });
+    console.log({ areiaFinal, bFinal, acFinal });
+
+    setAreiaFinal(areiaFinal.toFixed(2));
+    setBFinal(bFinal.toFixed(2));
+    setAcFinal(acFinal.toFixed(2));
+
     //console.log(validated)
   };
 
@@ -240,6 +263,13 @@ function App() {
 
     if (form.checkValidity() === false) {
       setValidated(false);
+      setIsShowingResult(false)
+    } else {
+      calculateResult()
+      setIsShowingResult(true)
+      if (isShowingResult === true){
+        document.getElementById("result").scrollIntoView()
+      }
     }
 
     setValidated(true);
@@ -257,141 +287,153 @@ function App() {
   };
 
   const optionsLyse = {
-		responsive: true,
+    responsive: true,
     maintainAspectRatio: false,
-		scales: {
-			x:{
-				beginAtZero: true,
+    scales: {
+      x: {
+        beginAtZero: true,
         title: {
           display: true,
-          text: 'A/C (Kg/Kg)'
-        }
-			},
-			y:{
-				beginAtZero: true,
+          text: "A/C (Kg/Kg)",
+        },
+      },
+      y: {
+        beginAtZero: true,
         reverse: true,
-        position: 'right',
+        position: "right",
         title: {
           display: true,
-          text: 'm (Kg)'
-        }
-			}
-		},
-		plugins: {
-			title: {
-				display: true,
-				text: 'Lei de Lyse',
-        position: 'bottom'
-			},
+          text: "m (Kg)",
+        },
+      },
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: "Lei de Lyse",
+        position: "bottom",
+      },
       legend: {
         display: false,
-      }
-		},
-	};
+      },
+    },
+  };
 
   const optionsKirilos = {
-		responsive: true,
+    responsive: true,
     maintainAspectRatio: false,
-		scales: {
-			x:{
-				beginAtZero: true,
+    scales: {
+      x: {
+        beginAtZero: true,
         reverse: true,
         title: {
           display: true,
-          text: 'Consumo (Kg/m³)'
-        }
-			},
-			y:{
-				beginAtZero: true,
+          text: "Consumo (Kg/m³)",
+        },
+      },
+      y: {
+        beginAtZero: true,
         reverse: true,
         title: {
           display: true,
-          text: 'm (Kg)'
-        }
-			}
-		},
-		plugins: {
-			title: {
-				display: true,
-				text: 'Lei de Kirilos',
-        position: 'bottom'
-			},
+          text: "m (Kg)",
+        },
+      },
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: "Lei de Kirilos",
+        position: "bottom",
+      },
       legend: {
         display: false,
-      }
-		},
-	};
+      },
+    },
+  };
 
-	const optionsAbrams = {
-		responsive: true,
+  const optionsAbrams = {
+    responsive: true,
     maintainAspectRatio: false,
-		scales: {
-			x:{
-				beginAtZero: true,
-        position: 'top',
+    scales: {
+      x: {
+        beginAtZero: true,
+        position: "top",
         title: {
           display: true,
-          text: 'A/C (Kg/Kg)'
-        }
-			},
-			y:{
-				beginAtZero: true,
-        position: 'right',
+          text: "A/C (Kg/Kg)",
+        },
+      },
+      y: {
+        beginAtZero: true,
+        position: "right",
         title: {
           display: true,
-          text: 'fcj (MPa)'
-        }
-			}
-		},
-		plugins: {
-			title: {
-				display: true,
-				text: 'Lei de Abrams',
-			},
+          text: "fcj (MPa)",
+        },
+      },
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: "Lei de Abrams",
+      },
       legend: {
         display: false,
-      }
-		},
-	};
+      },
+    },
+  };
 
   const dataAbrams = {
-		datasets: [
-			{
-				//label: 'Dataset 1',
-				data: [{ x: ac1, y: fcj1 }, { x: ac2, y: fcj2 }, { x: ac3, y: fcj3 }],
-				borderColor: 'rgb(255, 99, 132)',
-				backgroundColor: 'rgba(255, 99, 132, 0.5)',
-				showLine: true,
-				tension: 0.4
-			}
-		],
-	};
+    datasets: [
+      {
+        //label: 'Dataset 1',
+        data: [
+          { x: ac1, y: fcj1 },
+          { x: ac2, y: fcj2 },
+          { x: ac3, y: fcj3 },
+        ],
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        showLine: true,
+        tension: 0.4,
+      },
+    ],
+  };
 
   const dataKirilos = {
-		datasets: [
-			{
-				label: 'Dataset 1',
-				data: [{ x: c1, y: m1 }, { x: c2, y: m2 }, { x: c3, y: m3 }],
-				borderColor: 'rgb(255, 99, 132)',
-				backgroundColor: 'rgba(255, 99, 132, 0.5)',
-				showLine: true,
-				tension: 0.4
-			}
-		],
-	};
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: [
+          { x: c1, y: m1 },
+          { x: c2, y: m2 },
+          { x: c3, y: m3 },
+        ],
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        showLine: true,
+        tension: 0.4,
+      },
+    ],
+  };
 
   const dataLyse = {
-		datasets: [
-			{
-				label: 'Dataset 1',
-				data: [{ x: ac1, y: m1 }, { x: ac2, y: m2 }, { x: ac3, y: m3 }],
-				borderColor: 'rgb(255, 99, 132)',
-				backgroundColor: 'rgba(255, 99, 132, 0.5)',
-				showLine: true,
-				tension: 0.4
-			}
-		],
-	};
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: [
+          { x: ac1, y: m1 },
+          { x: ac2, y: m2 },
+          { x: ac3, y: m3 },
+        ],
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        showLine: true,
+        tension: 0.4,
+      },
+    ],
+  };
 
   return (
     <div className="App">
@@ -410,7 +452,7 @@ function App() {
             <Navbar.Brand>Calculadora de Dosagem de Concreto</Navbar.Brand>
           </Container>
         </Navbar>
-        <Container className="my-5" style={{maxWidth: 960}}>
+        <Container className="my-5" style={{ maxWidth: 960 }}>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row>
               <h3>Ensaio 1</h3>
@@ -699,8 +741,22 @@ function App() {
                       value={4.0}
                       onChange={AnswerChangeHandler}
                     />
-                    <Form.Check type="radio" label="B" name="sd" id="b" value={5.5} onChange={AnswerChangeHandler}/>
-                    <Form.Check type="radio" label="C" name="sd" id="c" value={7} onChange={AnswerChangeHandler}/>
+                    <Form.Check
+                      type="radio"
+                      label="B"
+                      name="sd"
+                      id="b"
+                      value={5.5}
+                      onChange={AnswerChangeHandler}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="C"
+                      name="sd"
+                      id="c"
+                      value={7}
+                      onChange={AnswerChangeHandler}
+                    />
                   </Col>
                 </Form.Group>
               </fieldset>
@@ -721,9 +777,27 @@ function App() {
                       required
                       onChange={AnswerChangeHandler}
                     />
-                    <Form.Check type="radio" label="II" name="ca" value="2" onChange={AnswerChangeHandler}/>
-                    <Form.Check type="radio" label="III" name="ca" value="3" onChange={AnswerChangeHandler}/>
-                    <Form.Check type="radio" label="IV" name="ca" value="4" onChange={AnswerChangeHandler}/>
+                    <Form.Check
+                      type="radio"
+                      label="II"
+                      name="ca"
+                      value="2"
+                      onChange={AnswerChangeHandler}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="III"
+                      name="ca"
+                      value="3"
+                      onChange={AnswerChangeHandler}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="IV"
+                      name="ca"
+                      value="4"
+                      onChange={AnswerChangeHandler}
+                    />
                   </Col>
                 </Form.Group>
               </fieldset>
@@ -756,47 +830,46 @@ function App() {
                 </Form.Group>
               </fieldset>
             </Card>
-            <Button variant="primary" type="submit" onClick={calculateResult}>
+            <Button variant="primary" type="submit">
               Calcular
             </Button>
           </Form>
-          
-          <Badge bg="secondary"> New</Badge>
-          <Card style={{ width: '18rem' }}>
-  <Card.Body>
-    <Card.Title>Resultado</Card.Title>
-    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
-    <Card.Text>
-			Traço Final: 1 : {areiaFinal} : {bFinal} : {acFinal}
-			</Card.Text>
-		<Card.Text>
-      Sd:{sd} Tipo de concreto é {tc}, CA:{ca}, FCKmin:{fckMin} A/cmin:{acMin} e ConsumoCMin:{ccMin}
-    </Card.Text>
-    <Card.Link href="#">Card Link</Card.Link>
-    <Card.Link href="#">Another Link</Card.Link>
-  </Card.Body>
-</Card>
-<Row> 
-<Col xs={6}></Col>
-<Col xs={6}>
-  <Scatter options={optionsAbrams} data={dataAbrams} /> </Col>
-</Row>
-<Row>
-<Col xs={6}> 
-<Scatter options={optionsKirilos} data={dataKirilos} />
-</Col>
-<Col xs={6}> 
-<Scatter options={optionsLyse} data={dataLyse} />
-</Col>
-</Row>
-          
 
+          {isShowingResult && (<Card id="result">
+            <Card.Body>
+              <Card.Title>Resultado</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">
+                Card Subtitle
+              </Card.Subtitle>
+              <h2>Traço Final: 1 : {areiaFinal} : {bFinal} : {acFinal} </h2>
+              <Card.Text>
+                Teste
+              </Card.Text>
+              <Card.Text>
+                Sd:{sd} Tipo de concreto é {tc}, CA:{ca}, FCKmin:{fckMin}{" "}
+                A/cmin:{acMin} e ConsumoCMin:{ccMin}
+              </Card.Text>
+              <Row>
+                <Col xs={6}></Col>
+                <Col xs={6}>
+                  <Scatter options={optionsAbrams} data={dataAbrams} />{" "}
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={6}>
+                  <Scatter options={optionsKirilos} data={dataKirilos} />
+                </Col>
+                <Col xs={6}>
+                  <Scatter options={optionsLyse} data={dataLyse} />
+                </Col>
+              </Row>
+
+            </Card.Body>
+          </Card>)}
         </Container>
       </div>
     </div>
   );
-
-  
 }
 
 export default App;
