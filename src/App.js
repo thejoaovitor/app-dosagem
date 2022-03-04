@@ -469,6 +469,7 @@ function App() {
                       min="0.5"
                       step="any"
                       max="10"
+                      inputmode="decimal"
                     />
                   </InputGroup>
                 </Form.Group>
@@ -486,6 +487,7 @@ function App() {
                       min="0.1"
                       step="any"
                       max="10"
+                      inputmode="decimal"
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
@@ -506,6 +508,7 @@ function App() {
                       min="0.5"
                       step="any"
                       max="100"
+                      inputmode="decimal"
                     />
                     <InputGroup.Text>MPa</InputGroup.Text>
                   </InputGroup>
@@ -524,6 +527,7 @@ function App() {
                       min="0.5"
                       step="any"
                       max="1000"
+                      inputmode="decimal"
                     />
                     <InputGroup.Text>kg/dm³</InputGroup.Text>
                   </InputGroup>
@@ -546,6 +550,7 @@ function App() {
                       min="0.5"
                       step="any"
                       max="10"
+                      inputmode="decimal"
                     />
                   </InputGroup>
                 </Form.Group>
@@ -563,6 +568,7 @@ function App() {
                       min="0.1"
                       step="any"
                       max="10"
+                      inputmode="decimal"
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
