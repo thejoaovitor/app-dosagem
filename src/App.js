@@ -9,10 +9,8 @@ import {
   Container,
   InputGroup,
   Card,
-  Navbar,
-  Badge,
+  Navbar
 } from "react-bootstrap";
-//import Accordion from 'react-bootstrap/Accordion'
 import React, { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
@@ -24,7 +22,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line, Scatter } from "react-chartjs-2";
+import { Scatter } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -454,9 +452,9 @@ function App() {
         </Navbar>
         <Container className="my-5" style={{ maxWidth: 960 }}>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Row>
+            <Row className="my-4">
               <h3>Ensaio 1</h3>
-              <Col xs={6} md={3}>
+              <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="m1">
                   <Form.Label>Traço</Form.Label>
                   <InputGroup>
@@ -472,10 +470,13 @@ function App() {
                       inputmode="decimal"
                     />
                   </InputGroup>
+                  <Form.Control.Feedback type="invalid">
+                    Insira um valor entre
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
 
-              <Col xs={6} md={3}>
+              <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="ac1">
                   <Form.Label>a/c</Form.Label>
                   <InputGroup>
@@ -494,7 +495,7 @@ function App() {
                 </Form.Group>
               </Col>
 
-              <Col xs={6} md={3}>
+              <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="fcj1">
                   <Form.Label>
                     f<sub>cj</sub>
@@ -515,7 +516,7 @@ function App() {
                 </Form.Group>
               </Col>
 
-              <Col xs={6} md={3}>
+              <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="me1">
                   <Form.Label>Massa Específica</Form.Label>
                   <InputGroup>
@@ -535,9 +536,9 @@ function App() {
               </Col>
             </Row>
 
-            <Row>
+            <Row className="my-4">
               <h3>Ensaio 2</h3>
-              <Col xs={6} md={3}>
+              <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="m2">
                   <Form.Label>Traço</Form.Label>
                   <InputGroup>
@@ -556,7 +557,7 @@ function App() {
                 </Form.Group>
               </Col>
 
-              <Col xs={6} md={3}>
+              <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="ac2">
                   <Form.Label>a/c</Form.Label>
                   <InputGroup>
@@ -575,7 +576,7 @@ function App() {
                 </Form.Group>
               </Col>
 
-              <Col xs={6} md={3}>
+              <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="fcj2">
                   <Form.Label>
                     f<sub>cj</sub>
@@ -596,7 +597,7 @@ function App() {
                 </Form.Group>
               </Col>
 
-              <Col xs={6} md={3}>
+              <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="me2">
                   <Form.Label>Massa Específica</Form.Label>
                   <InputGroup>
@@ -616,9 +617,9 @@ function App() {
               </Col>
             </Row>
 
-            <Row>
+            <Row className="my-4">
               <h3>Ensaio 3</h3>
-              <Col xs={6} md={3}>
+              <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="m3">
                   <Form.Label>Traço</Form.Label>
                   <InputGroup>
@@ -637,7 +638,7 @@ function App() {
                 </Form.Group>
               </Col>
 
-              <Col xs={6} md={3}>
+              <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="ac3">
                   <Form.Label>a/c</Form.Label>
                   <InputGroup>
@@ -656,7 +657,7 @@ function App() {
                 </Form.Group>
               </Col>
 
-              <Col xs={6} md={3}>
+              <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="fcj3">
                   <Form.Label>
                     f<sub>cj</sub>
@@ -677,7 +678,7 @@ function App() {
                 </Form.Group>
               </Col>
 
-              <Col xs={6} md={3}>
+              <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="me3">
                   <Form.Label>Massa Específica</Form.Label>
                   <InputGroup>
@@ -697,7 +698,7 @@ function App() {
               </Col>
             </Row>
 
-            <Row>
+            <Row className="my-4">
               <h3>Propriedades do Concreto</h3>
               <Col>
                 <Form.Group controlId="ta">
@@ -739,7 +740,7 @@ function App() {
                 </Form.Group>
               </Col>
             </Row>
-            <Card>
+            <Card className="my-2 p-2">
               <fieldset>
                 <Form.Group as={Row} controlId="sd">
                   <Form.Label as="legend" column sm={2}>
@@ -776,7 +777,7 @@ function App() {
               </fieldset>
             </Card>
 
-            <Card>
+            <Card className="my-2 p-2">
               <fieldset>
                 <Form.Group as={Row} controlId="ca">
                   <Form.Label as="legend" column sm={2}>
@@ -816,7 +817,7 @@ function App() {
                 </Form.Group>
               </fieldset>
             </Card>
-            <Card>
+            <Card className="my-2 p-2">
               <fieldset>
                 <Form.Group as={Row} controlId="tc">
                   <Form.Label as="legend" column sm={2}>
@@ -844,17 +845,16 @@ function App() {
                 </Form.Group>
               </fieldset>
             </Card>
-            <Button variant="primary" type="submit">
+            <div className="d-grid gap-2 my-2">
+            <Button variant="primary" type="submit" size="lg">
               Calcular
             </Button>
+            </div>
           </Form>
 
-          {isShowingResult && (<Card id="result">
+          {isShowingResult && (<Card id="result" className="my-5" border="primary">
+            <Card.Header>Resultado</Card.Header>
             <Card.Body>
-              <Card.Title>Resultado</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
-                Card Subtitle
-              </Card.Subtitle>
               <h2>Traço Final: 1 : {areiaFinal} : {bFinal} : {acFinal} </h2>
               <Card.Text>
                 Teste
@@ -863,17 +863,17 @@ function App() {
                 Sd:{sd} Tipo de concreto é {tc}, CA:{ca}, FCKmin:{fckMin}{" "}
                 A/cmin:{acMin} e ConsumoCMin:{ccMin}
               </Card.Text>
-              <Row>
-                <Col xs={6}></Col>
-                <Col xs={6}>
+              <Row style={{ height: 250 }}>
+                <Col xs={6} className="pe-0"></Col>
+                <Col xs={6} className="ps-0">
                   <Scatter options={optionsAbrams} data={dataAbrams} />{" "}
                 </Col>
               </Row>
-              <Row>
-                <Col xs={6}>
+              <Row style={{ height: 250 }}>
+                <Col xs={6} className="pe-0">
                   <Scatter options={optionsKirilos} data={dataKirilos} />
                 </Col>
-                <Col xs={6}>
+                <Col xs={6} className="ps-0">
                   <Scatter options={optionsLyse} data={dataLyse} />
                 </Col>
               </Row>
