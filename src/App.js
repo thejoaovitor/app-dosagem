@@ -106,6 +106,8 @@ function App() {
     setMinimumValues();
   };
 
+  console.log(window.location.href);
+
   function setMinimumValues() {
     if (tc === "CP") {
       if (ca === 1) {
