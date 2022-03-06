@@ -35,3 +35,21 @@
     transform: rotate(360deg);
   }
 }
+
+@media print {
+  body {
+    zoom:75%; /*or whatever percentage you need, play around with this number*/
+  }
+
+  .btn {
+    display: none !important;
+  }
+
+  .pagebreak { page-break-before: always; 
+  }
+
+  canvas {
+    width: 450px !important;
+    height: 250px !important;
+  }
+}

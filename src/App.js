@@ -459,17 +459,18 @@ function App() {
     <div className="App">
       <div>
         <Navbar bg="light">
-          <Container>
+          <Container style={{ maxWidth: 960 }}>
             <Navbar.Brand href="#home">
               <img
                 src="https://www.ufes.br/sites/all/themes/padrao_ufes/images/marca_ufes.png"
                 //width="30"
                 height="50"
                 className="d-inline-block align-top"
-                alt="React Bootstrap logo"
+                alt="Logo Universidade Federal Espirito Santo"
+                className="d-inline-block align-middle"
               />
             </Navbar.Brand>
-            <Navbar.Brand>Calculadora de Dosagem de Concreto</Navbar.Brand>
+            <p>Calculadora de Dosagem de Concreto</p>
           </Container>
         </Navbar>
         <Container className="my-5" style={{ maxWidth: 960 }}>
@@ -720,49 +721,8 @@ function App() {
                 </Form.Group>
               </Col>
             </Row>
-
-            <Row className="my-4">
-              <h3>Propriedades do Concreto</h3>
-              <Col>
-                <Form.Group controlId="ta">
-                  <Form.Label>Teor de Argamassa</Form.Label>
-                  <InputGroup>
-                    <Form.Control
-                      placeholder="0.0"
-                      required
-                      type="number"
-                      inputMode="decimal"
-                      min="1"
-                      step="any"
-                      max="100"
-                      
-                    />
-                    <InputGroup.Text>% em massa</InputGroup.Text>
-                  </InputGroup>
-                </Form.Group>
-              </Col>
-
-              <Col>
-                <Form.Group controlId="fck">
-                  <Form.Label>
-                    f<sub>ck</sub>
-                  </Form.Label>
-                  <InputGroup>
-                    <Form.Control
-                      placeholder="0.0"
-                      required
-                      type="number"
-                      inputMode="decimal"
-                      min="0.5"
-                      step="any"
-                      max="50"
-                      
-                    />
-                    <InputGroup.Text>MPa</InputGroup.Text>
-                  </InputGroup>
-                </Form.Group>
-              </Col>
-            </Row>
+            <h3>Propriedades do Concreto</h3>
+            
             <Card className="my-2 p-2">
               <fieldset>
                 <Form.Group as={Row} controlId="sd">
@@ -868,49 +828,122 @@ function App() {
                 </Form.Group>
               </fieldset>
             </Card>
-            <div className="d-grid gap-2 my-2">
-            <Button variant="primary" type="submit" size="lg">
+            <div className="d-grid gap-2 my-auto">
+
+            <Row className="my-2">
+              
+              <Col>
+                <Form.Group controlId="ta">
+                  <Form.Label>Teor de Argamassa</Form.Label>
+                  <InputGroup>
+                    <Form.Control
+                      placeholder="0.0"
+                      required
+                      type="number"
+                      inputMode="decimal"
+                      min="1"
+                      step="any"
+                      max="100"
+                      
+                    />
+                    <InputGroup.Text>% em massa</InputGroup.Text>
+                  </InputGroup>
+                </Form.Group>
+              </Col>
+
+              <Col>
+                <Form.Group controlId="fck">
+                  <Form.Label>
+                    f<sub>ck</sub>
+                  </Form.Label>
+                  <InputGroup>
+                    <Form.Control
+                      placeholder="0.0"
+                      required
+                      type="number"
+                      inputMode="decimal"
+                      min="0.5"
+                      step="any"
+                      max="50"
+                      
+                    />
+                    <InputGroup.Text>MPa</InputGroup.Text>
+                  </InputGroup>
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Row className="my-1">
+              <Col>
+                <Form.Group controlId="ta">
+                  <Form.Label>Slump <sub>(Opcional)</sub></Form.Label>
+                  <InputGroup>
+                    <Form.Control
+                      placeholder="0.0"
+                      type="number"
+                      inputMode="decimal"
+                      min="0"
+                      step="any"
+                      max="50"
+                    />
+                    <InputGroup.Text>cm</InputGroup.Text>
+                  </InputGroup>
+                </Form.Group>
+              </Col>
+
+              <Col>
+                <Form.Group controlId="fck">
+                  <Form.Label>
+                    Teor de Aditivo <sub>(Opcional)</sub>
+                  </Form.Label>
+                  <InputGroup>
+                    <Form.Control
+                      placeholder="0.0"
+                      type="number"
+                      inputMode="decimal"
+                      min="0.5"
+                      step="any"
+                      max="50"
+                    />
+                    <InputGroup.Text>% em massa</InputGroup.Text>
+                  </InputGroup>
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Button variant="primary" type="submit" size="lg" className="mx-auto">
               Calcular
             </Button>
             
             </div>
           </Form>
 
-          {isShowingResult && (<Card id="result" className="my-5" border="primary">
+          {isShowingResult && (<Card id="result" className="my-5 pagebreak" border="primary">
             <Card.Header>Resultado</Card.Header>
             <Card.Body>
+              <h4>Traço Final</h4>
             <Table striped bordered>
                   <thead>
-                    
-                      <th> Traço Final </th>
-                    
-                  </thead>
-                  <tbody>
                   <tr>
                       <th>Cimento</th>
                       <th>Areia</th>
                       <th>Brita</th>
                       <th>Água</th>
                     </tr>
+                  </thead>
+                  <tbody>
                     <tr>
                       <td> 1 </td>
                       <td> {areiaFinal} </td>
                       <td>{bFinal} </td>
                       <td> {acFinal} </td>
                     </tr>
-                    <tr>
-                      <td> Consumo de Materiais (Kg/m³ de Concreto)</td>
-                      <td> {cFinal} </td>
-                      <td> {(cFinal*areiaFinal).toFixed(2)} </td>
-                      <td> {(cFinal*bFinal).toFixed(2)} </td>
-                      <td> {(cFinal*acFinal).toFixed(2)} </td>
-                    </tr>
                   </tbody>
                 </Table>
+                <h4>Consumo de Materiais (Kg/m³ de Concreto)</h4>
                 <Table striped bordered>
                   <thead>
                     <tr>
-                      <th> </th>
                       <th>Cimento</th>
                       <th>Areia</th>
                       <th>Brita</th>
@@ -919,14 +952,6 @@ function App() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Traço Final</td>
-                      <td> 1 </td>
-                      <td> {areiaFinal} </td>
-                      <td>{bFinal} </td>
-                      <td> {acFinal} </td>
-                    </tr>
-                    <tr>
-                      <td> Consumo de Materiais (Kg/m³ de Concreto)</td>
                       <td> {cFinal} </td>
                       <td> {(cFinal*areiaFinal).toFixed(2)} </td>
                       <td> {(cFinal*bFinal).toFixed(2)} </td>
@@ -941,6 +966,7 @@ function App() {
                 Sd:{sd} Tipo de concreto é {tc}, CA:{ca}, FCKmin:{fckMin}{" "}
                 A/cmin:{acMin} e ConsumoCMin:{ccMin}
               </Card.Text>
+              <h4>Gráfico</h4>
               <Row style={{ height: 250 }}>
                 <Col xs={6} className="pe-0"></Col>
                 <Col xs={6} className="ps-0">
@@ -955,6 +981,10 @@ function App() {
                   <Scatter options={optionsLyse} data={dataLyse} />
                 </Col>
               </Row>
+
+              <Button variant="outlined-secondary" onClick={() => window.print()}>
+              Imprimir
+            </Button>
 
             </Card.Body>
           </Card>)}
