@@ -9,7 +9,8 @@ import {
   Container,
   InputGroup,
   Card,
-  Navbar
+  Navbar,
+  Table
 } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import {
@@ -64,6 +65,7 @@ function App() {
   var [bFinal, setBFinal] = useState(0);
 
   const [isShowingResult, setIsShowingResult] = useState(false);
+  const [validated, setValidated] = useState(false);
 
   useEffect(() => {
     if (isShowingResult === true){
@@ -250,11 +252,32 @@ function App() {
     setAreiaFinal(areiaFinal.toFixed(2));
     setBFinal(bFinal.toFixed(2));
     setAcFinal(acFinal.toFixed(2));
+    setCFinal(cFinal.toFixed(2))
 
     //console.log(validated)
   };
 
-  const [validated, setValidated] = useState(false);
+  function populateDemoValues() {
+    document.getElementById("m1").value = 4;
+    document.getElementById("ac1").value = 0.47;
+    document.getElementById("fcj1").value = 45.1;
+    document.getElementById("me1").value = 2.28;
+
+    document.getElementById("m2").value = 5;
+    document.getElementById("ac2").value = 0.56;
+    document.getElementById("fcj2").value = 36.4;
+    document.getElementById("me2").value = 2.3;
+
+    document.getElementById("m3").value = 6;
+    document.getElementById("ac3").value = 0.65;
+    document.getElementById("fcj3").value = 29.6 ;
+    document.getElementById("me3").value = 2.32;
+
+    document.getElementById("ta").value = 52;
+    document.getElementById("fck").value = 30;
+    console.log("populate function")
+  }
+  
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -451,6 +474,9 @@ function App() {
           </Container>
         </Navbar>
         <Container className="my-5" style={{ maxWidth: 960 }}>
+        <Button variant="outline-secondary" onClick={populateDemoValues}>
+              Adicionar Valores Demonstração
+            </Button>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="my-4">
               <h3>Ensaio 1</h3>
@@ -463,16 +489,14 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="0.5"
                       step="any"
                       max="10"
-                      inputmode="decimal"
+                      
                     />
+                    
                   </InputGroup>
-                  <Form.Control.Feedback type="invalid">
-                    Insira um valor entre
-                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
 
@@ -484,11 +508,11 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="0.1"
                       step="any"
                       max="10"
-                      inputmode="decimal"
+                      
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
@@ -505,11 +529,11 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="0.5"
                       step="any"
                       max="100"
-                      inputmode="decimal"
+                      
                     />
                     <InputGroup.Text>MPa</InputGroup.Text>
                   </InputGroup>
@@ -524,13 +548,13 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="0.5"
                       step="any"
                       max="1000"
-                      inputmode="decimal"
+                      
                     />
-                    <InputGroup.Text>kg/dm³</InputGroup.Text>
+                    <InputGroup.Text>kg/m³</InputGroup.Text>
                   </InputGroup>
                 </Form.Group>
               </Col>
@@ -547,11 +571,11 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="0.5"
                       step="any"
                       max="10"
-                      inputmode="decimal"
+                      
                     />
                   </InputGroup>
                 </Form.Group>
@@ -565,11 +589,11 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="0.1"
                       step="any"
                       max="10"
-                      inputmode="decimal"
+                      
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
@@ -586,11 +610,11 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="0.5"
                       step="any"
                       max="100"
-                      inputmode="decimal"
+                      
                     />
                     <InputGroup.Text>MPa</InputGroup.Text>
                   </InputGroup>
@@ -605,13 +629,13 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="0.5"
                       step="any"
                       max="1000"
-                      inputmode="decimal"
+                      
                     />
-                    <InputGroup.Text>kg/dm³</InputGroup.Text>
+                    <InputGroup.Text>kg/m³</InputGroup.Text>
                   </InputGroup>
                 </Form.Group>
               </Col>
@@ -628,11 +652,11 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="0.5"
                       step="any"
                       max="10"
-                      inputmode="decimal"
+                      
                     />
                   </InputGroup>
                 </Form.Group>
@@ -646,11 +670,11 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="0.1"
                       step="any"
                       max="10"
-                      inputmode="decimal"
+                      
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
@@ -667,11 +691,11 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="0.5"
                       step="any"
                       max="100"
-                      inputmode="decimal"
+                      
                     />
                     <InputGroup.Text>MPa</InputGroup.Text>
                   </InputGroup>
@@ -686,13 +710,13 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="0.5"
                       step="any"
                       max="1000"
-                      inputmode="decimal"
+                      
                     />
-                    <InputGroup.Text>kg/dm³</InputGroup.Text>
+                    <InputGroup.Text>kg/m³</InputGroup.Text>
                   </InputGroup>
                 </Form.Group>
               </Col>
@@ -708,11 +732,11 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="1"
                       step="any"
                       max="100"
-                      inputmode="decimal"
+                      
                     />
                     <InputGroup.Text>% em massa</InputGroup.Text>
                   </InputGroup>
@@ -729,11 +753,11 @@ function App() {
                       placeholder="0.0"
                       required
                       type="number"
-                      inputMode="numeric"
+                      inputMode="decimal"
                       min="0.5"
                       step="any"
                       max="50"
-                      inputmode="decimal"
+                      
                     />
                     <InputGroup.Text>MPa</InputGroup.Text>
                   </InputGroup>
@@ -849,13 +873,40 @@ function App() {
             <Button variant="primary" type="submit" size="lg">
               Calcular
             </Button>
+            
             </div>
           </Form>
 
           {isShowingResult && (<Card id="result" className="my-5" border="primary">
             <Card.Header>Resultado</Card.Header>
             <Card.Body>
-              <h2>Traço Final: 1 : {areiaFinal} : {bFinal} : {acFinal} </h2>
+            <Table striped bordered>
+                  <thead>
+                    <tr>
+                      <th> </th>
+                      <th>Cimento</th>
+                      <th>Areia</th>
+                      <th>Brita</th>
+                      <th>Água</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Traço Final</td>
+                      <td> 1 </td>
+                      <td> {areiaFinal} </td>
+                      <td>{bFinal} </td>
+                      <td> {acFinal} </td>
+                    </tr>
+                    <tr>
+                      <td> Consumo de Materiais (Kg/m³ de Concreto)</td>
+                      <td> {cFinal} </td>
+                      <td> {(cFinal*areiaFinal).toFixed(2)} </td>
+                      <td> {(cFinal*bFinal).toFixed(2)} </td>
+                      <td> {(cFinal*acFinal).toFixed(2)} </td>
+                    </tr>
+                  </tbody>
+                </Table>
               <Card.Text>
                 Teste
               </Card.Text>
