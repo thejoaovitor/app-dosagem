@@ -226,7 +226,7 @@ function App() {
     cFinal = 1000 / (k5 + k6 * mFinal);
     if (cFinal < ccMin) {
       cFinal = ccMin;
-    }ain
+    }
 
     bFinal = mFinal - areiaFinal;
 
