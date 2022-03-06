@@ -27,6 +27,10 @@
   color: #61dafb;
 }
 
+p {
+  white-space: pre-line;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -38,14 +42,16 @@
 
 @media print {
   body {
-    zoom:75%; /*or whatever percentage you need, play around with this number*/
+    zoom: 75%; /*or whatever percentage you need, play around with this number*/
+    width: 1000px;
   }
 
   .btn {
     display: none !important;
   }
 
-  .pagebreak { page-break-before: always; 
+  .pagebreak {
+    page-break-before: always;
   }
 
   canvas {

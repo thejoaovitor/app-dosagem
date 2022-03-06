@@ -10,7 +10,7 @@ import {
   InputGroup,
   Card,
   Navbar,
-  Table
+  Table,
 } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import {
@@ -64,14 +64,27 @@ function App() {
   var [cFinal, setCFinal] = useState(0);
   var [bFinal, setBFinal] = useState(0);
 
+  var [x, setX] = useState(0);
+  var [y, setY] = useState(0);
+  var [b, setB] = useState(0);
+
+  var [k1, setK1] = useState(0);
+  var [k2, setK2] = useState(0);
+  var [k3, setK3] = useState(0);
+  var [k4, setK4] = useState(0);
+  var [k5, setK5] = useState(0);
+  var [k6, setK6] = useState(0);
+
+  var [volC, setVolC] = useState(0);
+
   const [isShowingResult, setIsShowingResult] = useState(false);
   const [validated, setValidated] = useState(false);
 
   useEffect(() => {
-    if (isShowingResult === true){
-      document.getElementById("result").scrollIntoView({behavior: 'smooth'})
+    if (isShowingResult === true) {
+      document.getElementById("result").scrollIntoView({ behavior: "smooth" });
     }
-}, [isShowingResult]);// This is be executed when the state changes
+  }, [isShowingResult]); // This is be executed when the state changes
 
   const AnswerChangeHandler = (e) => {
     if (e.target.name === "sd") {
@@ -153,43 +166,30 @@ function App() {
     fcj3 = +document.getElementById("fcj3").value;
     const me3 = +document.getElementById("me3").value;
 
-    setAc1(ac1);
-    setFcj1(fcj1);
-    setM1(m1);
-    setC1((me1 * 1000) / (1 + m1 + ac1));
-
-    setAc2(ac2);
-    setFcj2(fcj2);
-    setM2(m2);
-    setC2((me2 * 1000) / (1 + m2 + ac2));
-
-    setAc3(ac3);
-    setFcj3(fcj3);
-    setM3(m3);
-    setC3((me3 * 1000) / (1 + m3 + ac3));
-
     ta = +document.getElementById("ta").value;
     fck = +document.getElementById("fck").value;
 
+    volC = +document.getElementById("volC").value;
+
     console.log({ ta, fck, sd });
 
-    const x =
+    x =
       log(fcj1, 10) * (2 * ac1 - ac2 - ac3) +
       log(fcj2, 10) * (2 * ac2 - ac1 - ac3) +
       log(fcj3, 10) * (2 * ac3 - ac1 - ac2);
 
-    const y =
+    y =
       2 * (Math.pow(ac1, 2) + Math.pow(ac2, 2) + Math.pow(ac3, 2)) -
       2 * (ac1 * ac2 + ac1 * ac3 + ac2 * ac3);
 
-    const b = x / y;
-    const k1 = Math.pow(
+    b = x / y;
+    k1 = Math.pow(
       10,
       (1 / 3) *
         (log(fcj1, 10) + log(fcj2, 10) + log(fcj3, 10) - b * (ac1 + ac2 + ac3))
     );
-    const k2 = Math.pow(10, -b);
-    const k4 =
+    k2 = Math.pow(10, -b);
+    k4 =
       (m1 * ac1 + m2 * ac2 + m3 * ac3 - m2 * (ac1 + ac2 + ac3)) /
       (Math.pow(ac1, 2) +
         Math.pow(ac2, 2) +
@@ -200,13 +200,14 @@ function App() {
     const c2 = (me2 * 1000) / (1 + m2 + ac2);
     const c3 = (me3 * 1000) / (1 + m3 + ac3);
 
-    const k6 =
+    k6 =
       (1000 * 3 * (m1 / c1 + m2 / c2 + m3 / c3) -
         1000 * (1 / c1 + 1 / c2 + 1 / c3) * (m1 + m2 + m3)) /
       (3 * (Math.pow(m1, 2) + Math.pow(m2, 2) + Math.pow(m3, 2)) -
         Math.pow(m1 + m2 + m3, 2));
-    const k5 = (1000 * (1 / c1 + 1 / c2 + 1 / c3) - k6 * (m1 + m2 + m3)) / 3;
-    const k3 = m2 - (k4 * (ac1 + ac2 + ac3)) / 3;
+    k5 = (1000 * (1 / c1 + 1 / c2 + 1 / c3) - k6 * (m1 + m2 + m3)) / 3;
+
+    k3 = m2 - (k4 * (ac1 + ac2 + ac3)) / 3;
 
     if (fck < fckMin) {
       fcjFinal = fckMin + 1.65 * sd;
@@ -246,15 +247,40 @@ function App() {
       areiaFinal,
       cFinal,
     });
-    console.log({ areiaFinal, bFinal, acFinal });
+
+    setAc1(ac1);
+    setFcj1(fcj1);
+    setM1(m1);
+    setC1(c1);
+
+    setAc2(ac2);
+    setFcj2(fcj2);
+    setM2(m2);
+    setC2(c2);
+
+    setAc3(ac3);
+    setFcj3(fcj3);
+    setM3(m3);
+    setC3(c3);
+
+    setX(x);
+    setY(y);
+    setB(b);
+
+    setK1(k1);
+    setK2(k2);
+    setK3(k3);
+    setK4(k4);
+    setK5(k5);
+    setK6(k6);
+
+    setVolC(volC);
 
     setAreiaFinal(areiaFinal.toFixed(2));
     setBFinal(bFinal.toFixed(2));
     setAcFinal(acFinal.toFixed(2));
-    setCFinal(cFinal.toFixed(2))
-
-    //console.log(validated)
-  };
+    setCFinal(cFinal.toFixed(2));
+  }
 
   function populateDemoValues() {
     document.getElementById("m1").value = 4;
@@ -269,26 +295,25 @@ function App() {
 
     document.getElementById("m3").value = 6;
     document.getElementById("ac3").value = 0.65;
-    document.getElementById("fcj3").value = 29.6 ;
+    document.getElementById("fcj3").value = 29.6;
     document.getElementById("me3").value = 2.32;
 
     document.getElementById("ta").value = 52;
     document.getElementById("fck").value = 30;
-    console.log("populate function")
+    console.log("populate function");
   }
-  
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
 
     if (form.checkValidity() === false) {
       setValidated(false);
-      setIsShowingResult(false)
+      setIsShowingResult(false);
     } else {
-      calculateResult()
-      setIsShowingResult(true)
-      if (isShowingResult === true){
-        document.getElementById("result").scrollIntoView()
+      calculateResult();
+      setIsShowingResult(true);
+      if (isShowingResult === true) {
+        document.getElementById("result").scrollIntoView();
       }
     }
 
@@ -474,9 +499,9 @@ function App() {
           </Container>
         </Navbar>
         <Container className="my-5" style={{ maxWidth: 960 }}>
-        <Button variant="outline-secondary" onClick={populateDemoValues}>
-              Adicionar Valores Demonstração
-            </Button>
+          <Button variant="outline-secondary" onClick={populateDemoValues}>
+            Adicionar Valores Demonstração
+          </Button>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="my-4">
               <h3>Ensaio 1</h3>
@@ -493,9 +518,7 @@ function App() {
                       min="0.5"
                       step="any"
                       max="10"
-                      
                     />
-                    
                   </InputGroup>
                 </Form.Group>
               </Col>
@@ -512,7 +535,6 @@ function App() {
                       min="0.1"
                       step="any"
                       max="10"
-                      
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
@@ -533,7 +555,6 @@ function App() {
                       min="0.5"
                       step="any"
                       max="100"
-                      
                     />
                     <InputGroup.Text>MPa</InputGroup.Text>
                   </InputGroup>
@@ -552,7 +573,6 @@ function App() {
                       min="0.5"
                       step="any"
                       max="1000"
-                      
                     />
                     <InputGroup.Text>kg/m³</InputGroup.Text>
                   </InputGroup>
@@ -575,7 +595,6 @@ function App() {
                       min="0.5"
                       step="any"
                       max="10"
-                      
                     />
                   </InputGroup>
                 </Form.Group>
@@ -593,7 +612,6 @@ function App() {
                       min="0.1"
                       step="any"
                       max="10"
-                      
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
@@ -614,7 +632,6 @@ function App() {
                       min="0.5"
                       step="any"
                       max="100"
-                      
                     />
                     <InputGroup.Text>MPa</InputGroup.Text>
                   </InputGroup>
@@ -633,7 +650,6 @@ function App() {
                       min="0.5"
                       step="any"
                       max="1000"
-                      
                     />
                     <InputGroup.Text>kg/m³</InputGroup.Text>
                   </InputGroup>
@@ -656,7 +672,6 @@ function App() {
                       min="0.5"
                       step="any"
                       max="10"
-                      
                     />
                   </InputGroup>
                 </Form.Group>
@@ -674,7 +689,6 @@ function App() {
                       min="0.1"
                       step="any"
                       max="10"
-                      
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
@@ -695,7 +709,6 @@ function App() {
                       min="0.5"
                       step="any"
                       max="100"
-                      
                     />
                     <InputGroup.Text>MPa</InputGroup.Text>
                   </InputGroup>
@@ -714,7 +727,6 @@ function App() {
                       min="0.5"
                       step="any"
                       max="1000"
-                      
                     />
                     <InputGroup.Text>kg/m³</InputGroup.Text>
                   </InputGroup>
@@ -722,209 +734,320 @@ function App() {
               </Col>
             </Row>
             <h3>Propriedades do Concreto</h3>
-            
-            <Card className="my-2 p-2">
-              <fieldset>
-                <Form.Group as={Row} controlId="sd">
-                  <Form.Label as="legend" column sm={2}>
-                    Condição de Preparo do Concreto
-                  </Form.Label>
-                  <Col sm={10}>
-                    <Form.Check
-                      type="radio"
-                      label="A"
-                      name="sd"
-                      id="a"
-                      required
-                      value={4.0}
-                      onChange={AnswerChangeHandler}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="B"
-                      name="sd"
-                      id="b"
-                      value={5.5}
-                      onChange={AnswerChangeHandler}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="C"
-                      name="sd"
-                      id="c"
-                      value={7}
-                      onChange={AnswerChangeHandler}
-                    />
-                  </Col>
-                </Form.Group>
-              </fieldset>
-            </Card>
-
-            <Card className="my-2 p-2">
-              <fieldset>
-                <Form.Group as={Row} controlId="ca">
-                  <Form.Label as="legend" column sm={2}>
-                    Classe de Agressividade
-                  </Form.Label>
-                  <Col sm={10}>
-                    <Form.Check
-                      type="radio"
-                      label="I"
-                      name="ca"
-                      value="1"
-                      required
-                      onChange={AnswerChangeHandler}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="II"
-                      name="ca"
-                      value="2"
-                      onChange={AnswerChangeHandler}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="III"
-                      name="ca"
-                      value="3"
-                      onChange={AnswerChangeHandler}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="IV"
-                      name="ca"
-                      value="4"
-                      onChange={AnswerChangeHandler}
-                    />
-                  </Col>
-                </Form.Group>
-              </fieldset>
-            </Card>
-            <Card className="my-2 p-2">
-              <fieldset>
-                <Form.Group as={Row} controlId="tc">
-                  <Form.Label as="legend" column sm={2}>
-                    Tipo de Concreto
-                  </Form.Label>
-                  <Col sm={10}>
-                    <Form.Check
-                      type="radio"
-                      label="CA - Concreto Armado"
-                      name="tc"
-                      id="ca"
-                      required
-                      value="CA"
-                      onChange={AnswerChangeHandler}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="CP - Concreto Protendido"
-                      name="tc"
-                      id="cp"
-                      value="CP"
-                      onChange={AnswerChangeHandler}
-                    />
-                  </Col>
-                </Form.Group>
-              </fieldset>
-            </Card>
+            <Row>
+              <Col xs={6} md={4}>
+                <Card className="my-2 p-2">
+                  <fieldset>
+                    <Form.Group as={Row} controlId="sd">
+                      <Form.Label as="legend" column xl={6}>
+                        Condição de Preparo do Concreto
+                      </Form.Label>
+                      <Col xl={6}>
+                        <Form.Check
+                          type="radio"
+                          label="A"
+                          name="sd"
+                          id="a"
+                          required
+                          value={4.0}
+                          onChange={AnswerChangeHandler}
+                        />
+                        <Form.Check
+                          type="radio"
+                          label="B"
+                          name="sd"
+                          id="b"
+                          value={5.5}
+                          onChange={AnswerChangeHandler}
+                        />
+                        <Form.Check
+                          type="radio"
+                          label="C"
+                          name="sd"
+                          id="c"
+                          value={7}
+                          onChange={AnswerChangeHandler}
+                        />
+                      </Col>
+                    </Form.Group>
+                  </fieldset>
+                </Card>
+              </Col>
+              <Col xs={6} md={4}>
+                <Card className="my-2 p-2">
+                  <fieldset>
+                    <Form.Group as={Row} controlId="ca">
+                      <Form.Label as="legend" column xl={6}>
+                        Classe de Agressividade
+                      </Form.Label>
+                      <Col xl={6}>
+                        <Form.Check
+                          type="radio"
+                          label="I"
+                          name="ca"
+                          value="1"
+                          required
+                          onChange={AnswerChangeHandler}
+                        />
+                        <Form.Check
+                          type="radio"
+                          label="II"
+                          name="ca"
+                          value="2"
+                          onChange={AnswerChangeHandler}
+                        />
+                        <Form.Check
+                          type="radio"
+                          label="III"
+                          name="ca"
+                          value="3"
+                          onChange={AnswerChangeHandler}
+                        />
+                        <Form.Check
+                          type="radio"
+                          label="IV"
+                          name="ca"
+                          value="4"
+                          onChange={AnswerChangeHandler}
+                        />
+                      </Col>
+                    </Form.Group>
+                  </fieldset>
+                </Card>
+              </Col>
+              <Col xs={6} md={4}>
+                <Card className="my-2 p-2">
+                  <fieldset>
+                    <Form.Group as={Row} controlId="tc">
+                      <Form.Label as="legend" column xl={6}>
+                        Tipo de Concreto
+                      </Form.Label>
+                      <Col xl={6}>
+                        <Form.Check
+                          type="radio"
+                          label="CA - Concreto Armado"
+                          name="tc"
+                          id="ca"
+                          required
+                          value="CA"
+                          onChange={AnswerChangeHandler}
+                        />
+                        <Form.Check
+                          type="radio"
+                          label="CP - Concreto Protendido"
+                          name="tc"
+                          id="cp"
+                          value="CP"
+                          onChange={AnswerChangeHandler}
+                        />
+                      </Col>
+                    </Form.Group>
+                  </fieldset>
+                </Card>
+              </Col>
+            </Row>
             <div className="d-grid gap-2 my-auto">
+              <Row className="my-2">
+                <Col>
+                  <Form.Group controlId="ta">
+                    <Form.Label>Teor de Argamassa</Form.Label>
+                    <InputGroup>
+                      <Form.Control
+                        placeholder="0.0"
+                        required
+                        type="number"
+                        inputMode="decimal"
+                        min="1"
+                        step="any"
+                        max="100"
+                      />
+                      <InputGroup.Text>% em massa</InputGroup.Text>
+                    </InputGroup>
+                  </Form.Group>
+                </Col>
 
-            <Row className="my-2">
-              
-              <Col>
-                <Form.Group controlId="ta">
-                  <Form.Label>Teor de Argamassa</Form.Label>
-                  <InputGroup>
-                    <Form.Control
-                      placeholder="0.0"
-                      required
-                      type="number"
-                      inputMode="decimal"
-                      min="1"
-                      step="any"
-                      max="100"
-                      
-                    />
-                    <InputGroup.Text>% em massa</InputGroup.Text>
-                  </InputGroup>
-                </Form.Group>
-              </Col>
+                <Col>
+                  <Form.Group controlId="fck">
+                    <Form.Label>
+                      f<sub>ck</sub>
+                    </Form.Label>
+                    <InputGroup>
+                      <Form.Control
+                        placeholder="0.0"
+                        required
+                        type="number"
+                        inputMode="decimal"
+                        min="0.5"
+                        step="any"
+                        max="50"
+                      />
+                      <InputGroup.Text>MPa</InputGroup.Text>
+                    </InputGroup>
+                  </Form.Group>
+                </Col>
+              </Row>
 
-              <Col>
-                <Form.Group controlId="fck">
-                  <Form.Label>
-                    f<sub>ck</sub>
-                  </Form.Label>
-                  <InputGroup>
-                    <Form.Control
-                      placeholder="0.0"
-                      required
-                      type="number"
-                      inputMode="decimal"
-                      min="0.5"
-                      step="any"
-                      max="50"
-                      
-                    />
-                    <InputGroup.Text>MPa</InputGroup.Text>
-                  </InputGroup>
-                </Form.Group>
-              </Col>
-            </Row>
+              <Row>
+                <Col xs={6} md={4} className="mt-2">
+                  <Form.Group controlId="sl">
+                    <Form.Label>
+                      Slump <sub>(Opcional)</sub>
+                    </Form.Label>
+                    <InputGroup>
+                      <Form.Control
+                        placeholder="0.0"
+                        type="number"
+                        inputMode="decimal"
+                        min="0"
+                        step="any"
+                        max="50"
+                      />
+                      <InputGroup.Text>cm</InputGroup.Text>
+                    </InputGroup>
+                  </Form.Group>
+                </Col>
 
-            <Row className="my-1">
-              <Col>
-                <Form.Group controlId="ta">
-                  <Form.Label>Slump <sub>(Opcional)</sub></Form.Label>
-                  <InputGroup>
-                    <Form.Control
-                      placeholder="0.0"
-                      type="number"
-                      inputMode="decimal"
-                      min="0"
-                      step="any"
-                      max="50"
-                    />
-                    <InputGroup.Text>cm</InputGroup.Text>
-                  </InputGroup>
-                </Form.Group>
-              </Col>
+                <Col xs={6} md={4} className="mt-2">
+                  <Form.Group controlId="taditivo">
+                    <Form.Label>
+                      Teor de Aditivo <sub>(Opcional)</sub>
+                    </Form.Label>
+                    <InputGroup>
+                      <Form.Control
+                        placeholder="0.0"
+                        type="number"
+                        inputMode="decimal"
+                        min="0"
+                        step="any"
+                        max="50"
+                      />
+                      <InputGroup.Text>% em massa</InputGroup.Text>
+                    </InputGroup>
+                  </Form.Group>
+                </Col>
 
-              <Col>
-                <Form.Group controlId="fck">
-                  <Form.Label>
-                    Teor de Aditivo <sub>(Opcional)</sub>
-                  </Form.Label>
-                  <InputGroup>
-                    <Form.Control
-                      placeholder="0.0"
-                      type="number"
-                      inputMode="decimal"
-                      min="0.5"
-                      step="any"
-                      max="50"
-                    />
-                    <InputGroup.Text>% em massa</InputGroup.Text>
-                  </InputGroup>
-                </Form.Group>
-              </Col>
-            </Row>
+                <Col xs={6} md={4} className="mt-2">
+                  <Form.Group controlId="volC">
+                    <Form.Label>
+                      Volume de Concreto <sub>(Opcional)</sub>
+                    </Form.Label>
+                    <InputGroup>
+                      <Form.Control
+                        placeholder="0.0"
+                        type="number"
+                        inputMode="decimal"
+                        min="1"
+                        step="any"
+                        defaultValue="1"
+                      />
+                      <InputGroup.Text>m³</InputGroup.Text>
+                    </InputGroup>
+                  </Form.Group>
+                </Col>
+              </Row>
 
-            <Button variant="primary" type="submit" size="lg" className="mx-auto">
-              Calcular
-            </Button>
-            
+              <Button
+                variant="primary"
+                type="submit"
+                size="lg"
+                className="mx-auto"
+              >
+                Calcular
+              </Button>
             </div>
           </Form>
 
-          {isShowingResult && (<Card id="result" className="my-5 pagebreak" border="primary">
-            <Card.Header>Resultado</Card.Header>
-            <Card.Body>
-              <h4>Traço Final</h4>
-            <Table striped bordered>
+          {isShowingResult && (
+            <Card id="result" className="my-5 pagebreak" border="primary">
+              <Card.Header>Resultado</Card.Header>
+              <Card.Body>
+                <h4>Cálculo</h4>
+                <Row>
+                  <Col xs={6} md={6}>
+                    <Table hover size="sm" responsive="sm">
+                      <tbody>
+                        <tr>
+                          <td> X </td>
+                          <td> {x} </td>
+                        </tr>
+                        <tr>
+                          <td> Y </td>
+                          <td> {y} </td>
+                        </tr>
+                        <tr>
+                          <td> b </td>
+                          <td> {b} </td>
+                        </tr>
+                        <tr>
+                          <td> c1 </td>
+                          <td> {c1} </td>
+                        </tr>
+                        <tr>
+                          <td> c2 </td>
+                          <td> {c2} </td>
+                        </tr>
+                        <tr>
+                          <td> c3 </td>
+                          <td> {c3} </td>
+                        </tr>
+                        <tr>
+                          <td> Desvio Padrão </td>
+                          <td> {sd} </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            {" "}
+                            f<sub>ck</sub> Mín.{" "}
+                          </td>
+                          <td> {fckMin} </td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                  <Col xs={6} md={6}>
+                    <Table hover size="sm" responsive="sm">
+                      <tbody>
+                        <tr>
+                          <td> K1 </td>
+                          <td> {k1} </td>
+                        </tr>
+                        <tr>
+                          <td> K2 </td>
+                          <td> {k2} </td>
+                        </tr>
+                        <tr>
+                          <td> K3 </td>
+                          <td> {k3} </td>
+                        </tr>
+                        <tr>
+                          <td> K4 </td>
+                          <td> {k4} </td>
+                        </tr>
+                        <tr>
+                          <td> K5 </td>
+                          <td> {k5} </td>
+                        </tr>
+                        <tr>
+                          <td> K6 </td>
+                          <td> {k6} </td>
+                        </tr>
+
+                        <tr>
+                          <td> A/C Mín. </td>
+                          <td> {acMin} </td>
+                        </tr>
+                        <tr>
+                          <td> Consumo de Cimento Mín. </td>
+                          <td> {ccMin} </td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                </Row>
+                <h4>Traço Final</h4>
+                <Table striped bordered>
                   <thead>
-                  <tr>
+                    <tr>
                       <th>Cimento</th>
                       <th>Areia</th>
                       <th>Brita</th>
@@ -953,41 +1076,58 @@ function App() {
                   <tbody>
                     <tr>
                       <td> {cFinal} </td>
-                      <td> {(cFinal*areiaFinal).toFixed(2)} </td>
-                      <td> {(cFinal*bFinal).toFixed(2)} </td>
-                      <td> {(cFinal*acFinal).toFixed(2)} </td>
+                      <td> {(cFinal * areiaFinal).toFixed(2)} </td>
+                      <td> {(cFinal * bFinal).toFixed(2)} </td>
+                      <td> {(cFinal * acFinal).toFixed(2)} </td>
                     </tr>
                   </tbody>
                 </Table>
-              <Card.Text>
-                Teste
-              </Card.Text>
-              <Card.Text>
-                Sd:{sd} Tipo de concreto é {tc}, CA:{ca}, FCKmin:{fckMin}{" "}
-                A/cmin:{acMin} e ConsumoCMin:{ccMin}
-              </Card.Text>
-              <h4>Gráfico</h4>
-              <Row style={{ height: 250 }}>
-                <Col xs={6} className="pe-0"></Col>
-                <Col xs={6} className="ps-0">
-                  <Scatter options={optionsAbrams} data={dataAbrams} />{" "}
-                </Col>
-              </Row>
-              <Row style={{ height: 250 }}>
-                <Col xs={6} className="pe-0">
-                  <Scatter options={optionsKirilos} data={dataKirilos} />
-                </Col>
-                <Col xs={6} className="ps-0">
-                  <Scatter options={optionsLyse} data={dataLyse} />
-                </Col>
-              </Row>
 
-              <Button variant="outlined-secondary" onClick={() => window.print()}>
-              Imprimir
-            </Button>
+                <h4>Consumo de Materiais para {volC}m³ de Concreto</h4>
+                <Table striped bordered>
+                  <thead>
+                    <tr>
+                      <th>Cimento</th>
+                      <th>Areia</th>
+                      <th>Brita</th>
+                      <th>Água</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td> {(cFinal * volC).toFixed(2)} </td>
+                      <td> {(cFinal * areiaFinal * volC).toFixed(2)} </td>
+                      <td> {(cFinal * bFinal * volC).toFixed(2)} </td>
+                      <td> {(cFinal * acFinal * volC).toFixed(2)} </td>
+                    </tr>
+                  </tbody>
+                </Table>
 
-            </Card.Body>
-          </Card>)}
+                <h4>Gráfico</h4>
+                <Row style={{ height: 250 }}>
+                  <Col xs={6} className="pe-0"></Col>
+                  <Col xs={6} className="ps-0">
+                    <Scatter options={optionsAbrams} data={dataAbrams} />{" "}
+                  </Col>
+                </Row>
+                <Row style={{ height: 250 }}>
+                  <Col xs={6} className="pe-0">
+                    <Scatter options={optionsKirilos} data={dataKirilos} />
+                  </Col>
+                  <Col xs={6} className="ps-0">
+                    <Scatter options={optionsLyse} data={dataLyse} />
+                  </Col>
+                </Row>
+
+                <Button
+                  variant="outlined-secondary"
+                  onClick={() => window.print()}
+                >
+                  Imprimir
+                </Button>
+              </Card.Body>
+            </Card>
+          )}
         </Container>
       </div>
     </div>
