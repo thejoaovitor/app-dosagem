@@ -69,7 +69,7 @@ function App() {
 
   useEffect(() => {
     if (isShowingResult === true){
-      document.getElementById("result").scrollIntoView()
+      document.getElementById("result").scrollIntoView({behavior: 'smooth'})
     }
 }, [isShowingResult]);// This is be executed when the state changes
 
@@ -216,18 +216,17 @@ function App() {
 
     acFinal = (log(k1, 10) - log(fcjFinal, 10)) / log(k2, 10);
 
-    mFinal = k3 + acFinal * k4;
-
     if (acFinal > acMin) {
-      //atenção aqui, essa validação ocorre antes ou depois do calculo do mFinal?
       acFinal = acMin;
     }
+
+    mFinal = k3 + acFinal * k4;
 
     areiaFinal = (ta * (1 + mFinal)) / 100 - 1;
     cFinal = 1000 / (k5 + k6 * mFinal);
     if (cFinal < ccMin) {
       cFinal = ccMin;
-    }
+    }ain
 
     bFinal = mFinal - areiaFinal;
 
@@ -881,6 +880,34 @@ function App() {
             <Card.Header>Resultado</Card.Header>
             <Card.Body>
             <Table striped bordered>
+                  <thead>
+                    
+                      <th> Traço Final </th>
+                    
+                  </thead>
+                  <tbody>
+                  <tr>
+                      <th>Cimento</th>
+                      <th>Areia</th>
+                      <th>Brita</th>
+                      <th>Água</th>
+                    </tr>
+                    <tr>
+                      <td> 1 </td>
+                      <td> {areiaFinal} </td>
+                      <td>{bFinal} </td>
+                      <td> {acFinal} </td>
+                    </tr>
+                    <tr>
+                      <td> Consumo de Materiais (Kg/m³ de Concreto)</td>
+                      <td> {cFinal} </td>
+                      <td> {(cFinal*areiaFinal).toFixed(2)} </td>
+                      <td> {(cFinal*bFinal).toFixed(2)} </td>
+                      <td> {(cFinal*acFinal).toFixed(2)} </td>
+                    </tr>
+                  </tbody>
+                </Table>
+                <Table striped bordered>
                   <thead>
                     <tr>
                       <th> </th>
