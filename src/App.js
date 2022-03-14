@@ -78,6 +78,7 @@ function App() {
   var [volC, setVolC] = useState(0);
 
   const [isShowingResult, setIsShowingResult] = useState(false);
+  const [isShowingSDTextBox, setIsShowingSDTextBox] = useState(false);
   const [validated, setValidated] = useState(false);
 
   useEffect(() => {
@@ -88,25 +89,32 @@ function App() {
 
   const AnswerChangeHandler = (e) => {
     if (e.target.name === "sd") {
-      sd = parseFloat(e.target.value);
-      setSd(parseFloat(e.target.value));
-      console.log(sd);
+      if (e.target.id === "d") {
+        setIsShowingSDTextBox(true);
+        sd = 1;
+        setSd(sd);
+      } else {
+        setIsShowingSDTextBox(false);
+        sd = parseFloat(e.target.value);
+        setSd(sd);
+      }
     }
+    if (e.target.name === "sdvalue") {
+      sd = +document.getElementById("sdvalue").value;
+      setSd(sd);
+    }
+
     if (e.target.name === "ca") {
       ca = parseInt(e.target.value);
-      setCa(parseInt(e.target.value));
-      console.log(ca);
+      setCa(ca);
     }
     if (e.target.name === "tc") {
       tc = e.target.value;
-      setTc(e.target.value);
-      console.log(tc);
+      setTc(tc);
     }
 
     setMinimumValues();
   };
-
-  console.log(window.location.href);
 
   function setMinimumValues() {
     if (tc === "CP") {
@@ -517,9 +525,9 @@ function App() {
                       required
                       type="number"
                       inputMode="decimal"
-                      min="0.5"
+                      min="0.01"
                       step="any"
-                      max="10"
+                      max="20"
                     />
                   </InputGroup>
                 </Form.Group>
@@ -534,9 +542,9 @@ function App() {
                       required
                       type="number"
                       inputMode="decimal"
-                      min="0.1"
+                      min="0.01"
                       step="any"
-                      max="10"
+                      max="5"
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
@@ -554,9 +562,9 @@ function App() {
                       required
                       type="number"
                       inputMode="decimal"
-                      min="0.5"
+                      min="5"
                       step="any"
-                      max="100"
+                      max="250"
                     />
                     <InputGroup.Text>MPa</InputGroup.Text>
                   </InputGroup>
@@ -576,7 +584,7 @@ function App() {
                       step="any"
                       max="1000"
                     />
-                    <InputGroup.Text>kg/m³</InputGroup.Text>
+                    <InputGroup.Text>kg/dm³</InputGroup.Text>
                   </InputGroup>
                 </Form.Group>
               </Col>
@@ -594,9 +602,9 @@ function App() {
                       required
                       type="number"
                       inputMode="decimal"
-                      min="0.5"
+                      min="0.01"
                       step="any"
-                      max="10"
+                      max="20"
                     />
                   </InputGroup>
                 </Form.Group>
@@ -611,9 +619,9 @@ function App() {
                       required
                       type="number"
                       inputMode="decimal"
-                      min="0.1"
+                      min="0.01"
                       step="any"
-                      max="10"
+                      max="5"
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
@@ -631,9 +639,9 @@ function App() {
                       required
                       type="number"
                       inputMode="decimal"
-                      min="0.5"
+                      min="5"
                       step="any"
-                      max="100"
+                      max="250"
                     />
                     <InputGroup.Text>MPa</InputGroup.Text>
                   </InputGroup>
@@ -653,7 +661,7 @@ function App() {
                       step="any"
                       max="1000"
                     />
-                    <InputGroup.Text>kg/m³</InputGroup.Text>
+                    <InputGroup.Text>kg/dm³</InputGroup.Text>
                   </InputGroup>
                 </Form.Group>
               </Col>
@@ -671,9 +679,9 @@ function App() {
                       required
                       type="number"
                       inputMode="decimal"
-                      min="0.5"
+                      min="0.01"
                       step="any"
-                      max="10"
+                      max="20"
                     />
                   </InputGroup>
                 </Form.Group>
@@ -688,9 +696,9 @@ function App() {
                       required
                       type="number"
                       inputMode="decimal"
-                      min="0.1"
+                      min="0.01"
                       step="any"
-                      max="10"
+                      max="5"
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
@@ -708,9 +716,9 @@ function App() {
                       required
                       type="number"
                       inputMode="decimal"
-                      min="0.5"
+                      min="5"
                       step="any"
-                      max="100"
+                      max="250"
                     />
                     <InputGroup.Text>MPa</InputGroup.Text>
                   </InputGroup>
@@ -730,24 +738,24 @@ function App() {
                       step="any"
                       max="1000"
                     />
-                    <InputGroup.Text>kg/m³</InputGroup.Text>
+                    <InputGroup.Text>kg/dm³</InputGroup.Text>
                   </InputGroup>
                 </Form.Group>
               </Col>
             </Row>
             <h3>Propriedades do Concreto</h3>
-            <Row>
-              <Col xs={6} md={4}>
-                <Card className="my-2 p-2">
+            <Row className="">
+              <Col xs={12} md={5} className="py-2">
+                <Card className="my-2 p-2 h-100">
                   <fieldset>
                     <Form.Group as={Row} controlId="sd">
-                      <Form.Label as="legend" column xl={6}>
+                      <Form.Label as="legend" column xl={12}>
                         Condição de Preparo do Concreto
                       </Form.Label>
-                      <Col xl={6}>
+                      <Col xl={12}>
                         <Form.Check
                           type="radio"
-                          label="A"
+                          label="A - Desvio Padrão: 4,0 MPa"
                           name="sd"
                           id="a"
                           required
@@ -756,7 +764,7 @@ function App() {
                         />
                         <Form.Check
                           type="radio"
-                          label="B"
+                          label="B  - Desvio Padrão: 5,5 MPa"
                           name="sd"
                           id="b"
                           value={5.5}
@@ -764,25 +772,56 @@ function App() {
                         />
                         <Form.Check
                           type="radio"
-                          label="C"
+                          label="C  - Desvio Padrão: 7,0 MPa"
                           name="sd"
                           id="c"
                           value={7}
                           onChange={AnswerChangeHandler}
                         />
+                        <Form.Check
+                          type="radio"
+                          label="Desvio Padrão Personalizado"
+                          name="sd"
+                          id="d"
+                          value=""
+                          onChange={AnswerChangeHandler}
+                        />
                       </Col>
                     </Form.Group>
                   </fieldset>
+                  {isShowingSDTextBox && (
+                    <Row>
+                      <Col sm={12} md={12} className="mt-2 ps-5">
+                        <Form.Group controlId="sdvalue">
+                          <Form.Label>Desvio Padrão</Form.Label>
+                          <InputGroup>
+                            <Form.Control
+                              placeholder="0.0"
+                              name="sdvalue"
+                              type="number"
+                              inputMode="decimal"
+                              min="0.01"
+                              step="any"
+                              max="30"
+                              defaultValue="1.0"
+                              onChange={AnswerChangeHandler}
+                            />
+                            <InputGroup.Text>MPa</InputGroup.Text>
+                          </InputGroup>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                  )}
                 </Card>
               </Col>
-              <Col xs={6} md={4}>
-                <Card className="my-2 p-2">
+              <Col xs={6} md={3} className="py-2">
+                <Card className="my-2 p-2 h-100">
                   <fieldset>
                     <Form.Group as={Row} controlId="ca">
-                      <Form.Label as="legend" column xl={6}>
+                      <Form.Label as="legend" column xl={12}>
                         Classe de Agressividade
                       </Form.Label>
-                      <Col xl={6}>
+                      <Col xl={12}>
                         <Form.Check
                           type="radio"
                           label="I"
@@ -817,14 +856,14 @@ function App() {
                   </fieldset>
                 </Card>
               </Col>
-              <Col xs={6} md={4}>
-                <Card className="my-2 p-2">
+              <Col xs={6} md={4} className="py-2">
+                <Card className="my-2 p-2 h-100">
                   <fieldset>
                     <Form.Group as={Row} controlId="tc">
-                      <Form.Label as="legend" column xl={6}>
+                      <Form.Label as="legend" column xl={12}>
                         Tipo de Concreto
                       </Form.Label>
-                      <Col xl={6}>
+                      <Col xl={12}>
                         <Form.Check
                           type="radio"
                           label="CA - Concreto Armado"
@@ -1065,7 +1104,7 @@ function App() {
                     </tr>
                   </tbody>
                 </Table>
-                <h4>Consumo de Materiais (Kg/m³ de Concreto)</h4>
+                <h4>Consumo de Materiais (s de Concreto)</h4>
                 <Table striped bordered>
                   <thead>
                     <tr>
