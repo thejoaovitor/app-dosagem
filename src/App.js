@@ -1009,27 +1009,27 @@ function App() {
                       <tbody>
                         <tr>
                           <td> X </td>
-                          <td> {x} </td>
+                          <td> {x.toFixed(4)} </td>
                         </tr>
                         <tr>
                           <td> Y </td>
-                          <td> {y} </td>
+                          <td> {y.toFixed(4)} </td>
                         </tr>
                         <tr>
                           <td> b </td>
-                          <td> {b} </td>
+                          <td> {b.toFixed(4)} </td>
                         </tr>
                         <tr>
-                          <td> c1 </td>
-                          <td> {c1} </td>
+                          <td> Consumo - Traço 1 </td>
+                          <td> {c1.toFixed(4)} </td>
                         </tr>
                         <tr>
-                          <td> c2 </td>
-                          <td> {c2} </td>
+                          <td> Consumo - Traço 2 </td>
+                          <td> {c2.toFixed(4)} </td>
                         </tr>
                         <tr>
-                          <td> c3 </td>
-                          <td> {c3} </td>
+                          <td> Consumo - Traço 3 </td>
+                          <td> {c3.toFixed(4)} </td>
                         </tr>
                         <tr>
                           <td> Desvio Padrão </td>
@@ -1050,27 +1050,27 @@ function App() {
                       <tbody>
                         <tr>
                           <td> K1 </td>
-                          <td> {k1} </td>
+                          <td> {k1.toFixed(4)} </td>
                         </tr>
                         <tr>
                           <td> K2 </td>
-                          <td> {k2} </td>
+                          <td> {k2.toFixed(4)} </td>
                         </tr>
                         <tr>
                           <td> K3 </td>
-                          <td> {k3} </td>
+                          <td> {k3.toFixed(4)} </td>
                         </tr>
                         <tr>
                           <td> K4 </td>
-                          <td> {k4} </td>
+                          <td> {k4.toFixed(4)} </td>
                         </tr>
                         <tr>
                           <td> K5 </td>
-                          <td> {k5} </td>
+                          <td> {k5.toFixed(4)} </td>
                         </tr>
                         <tr>
                           <td> K6 </td>
-                          <td> {k6} </td>
+                          <td> {k6.toFixed(4)} </td>
                         </tr>
 
                         <tr>
