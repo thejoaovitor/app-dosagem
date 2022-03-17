@@ -42,8 +42,12 @@ p {
 
 @media print {
   body {
-    zoom: 75%; /*or whatever percentage you need, play around with this number*/
+    zoom: 110%;
     width: 1000px;
+  }
+
+  .container {
+    width: 1700px;
   }
 
   .btn {
@@ -57,5 +61,9 @@ p {
   canvas {
     width: 450px !important;
     height: 250px !important;
+  }
+
+  @page {
+    size: A3;
   }
 }

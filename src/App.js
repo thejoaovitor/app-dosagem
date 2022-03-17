@@ -81,13 +81,16 @@ function App() {
   const [isShowingSDTextBox, setIsShowingSDTextBox] = useState(false);
   const [validated, setValidated] = useState(false);
 
+  //Após mostrar os resultados, rolar a tela do usuário
   useEffect(() => {
     if (isShowingResult === true) {
       document.getElementById("result").scrollIntoView({ behavior: "smooth" });
     }
-  }, [isShowingResult]); // This is be executed when the state changes
+  }, [isShowingResult]);
 
+  //Definir variáveis de desvio padrão, condição de preparo de concreto e tipo de concreto ao selecionar na interface
   const AnswerChangeHandler = (e) => {
+    //Essa função é executada toda vez que seleciona um dos seletores de multipla escolha
     if (e.target.name === "sd") {
       if (e.target.id === "d") {
         setIsShowingSDTextBox(true);
@@ -100,19 +103,20 @@ function App() {
       }
     }
     if (e.target.name === "sdvalue") {
-      sd = +document.getElementById("sdvalue").value;
+      sd = +document.getElementById("sdvalue").value; //Definir desvio padrão
       setSd(sd);
     }
 
     if (e.target.name === "ca") {
-      ca = parseInt(e.target.value);
+      ca = parseInt(e.target.value); //Definir classe de agressividade
       setCa(ca);
     }
     if (e.target.name === "tc") {
-      tc = e.target.value;
+      tc = e.target.value; //Definir Tipo de concreto
       setTc(tc);
     }
 
+    //Executar função para encontrar requisitos mínimos para o concreto
     setMinimumValues();
   };
 
@@ -161,6 +165,7 @@ function App() {
   }
 
   function calculateResult() {
+    //Essa função é executada ao clicar no botão calcular, caso os campos estejam validados
     m1 = +document.getElementById("m1").value;
     ac1 = +document.getElementById("ac1").value;
     fcj1 = +document.getElementById("fcj1").value;
@@ -293,6 +298,7 @@ function App() {
   }
 
   function populateDemoValues() {
+    //Função executada ao clicar em adicionar valores de demonstração
     document.getElementById("m1").value = 4;
     document.getElementById("ac1").value = 0.47;
     document.getElementById("fcj1").value = 45.1;
@@ -314,6 +320,7 @@ function App() {
   }
 
   const handleSubmit = (event) => {
+    //Essa função é executada ao clicar em Calcular, e valida os campos digitados, casos estejam validaos, ela executa a função calcular resultado.
     const form = event.currentTarget;
 
     if (form.checkValidity() === false) {
@@ -331,15 +338,11 @@ function App() {
     event.preventDefault();
     event.stopPropagation();
 
-    // if (form.checkValidity() === true) {
-    //   setValidated(true);
-    //   //event.preventDefault();
-    //   //event.stopPropagation();
-    // }
-
     console.log(form.checkValidity());
     console.log(validated);
   };
+
+  //Abaixo temos descritas as configurações (options) e dados (data) de cada gráfico exibido nos resultados
 
   const optionsLyse = {
     responsive: true,
@@ -442,7 +445,6 @@ function App() {
   const dataAbrams = {
     datasets: [
       {
-        //label: 'Dataset 1',
         data: [
           { x: ac1, y: fcj1 },
           { x: ac2, y: fcj2 },
@@ -490,6 +492,8 @@ function App() {
     ],
   };
 
+  //O código abaixo diz respeito a configuração dos elementos da interface, definição de tamanhos, espaçamentos, cores e outras configurações.
+
   return (
     <div className="App">
       <div>
@@ -509,6 +513,10 @@ function App() {
           </Container>
         </Navbar>
         <Container className="my-5" style={{ maxWidth: 960 }}>
+          <p>
+            Método IPT-USP, projeto de Graduação de Engenharia Civil -
+            Universidade Federal do Espirito Santo.
+          </p>
           <Button variant="outline-secondary" onClick={populateDemoValues}>
             Adicionar Valores Demonstração
           </Button>
@@ -1161,7 +1169,7 @@ function App() {
                 </Row>
 
                 <Button
-                  variant="outlined-secondary"
+                  variant="outline-secondary"
                   onClick={() => window.print()}
                 >
                   Imprimir
