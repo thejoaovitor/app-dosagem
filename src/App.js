@@ -1104,7 +1104,7 @@ function App() {
                     </tr>
                   </tbody>
                 </Table>
-                <h4>Consumo de Materiais (s de Concreto)</h4>
+                <h4>Consumo de Materiais (Kg/m³ de Concreto)</h4>
                 <Table striped bordered>
                   <thead>
                     <tr>
