@@ -25,6 +25,7 @@ import {
 } from "chart.js";
 import { Scatter } from "react-chartjs-2";
 import Pdf from "./PG - App Dosagem.pdf";
+import { BsBoxArrowUpRight } from "react-icons/bs";
 
 ChartJS.register(
   CategoryScale,
@@ -518,8 +519,8 @@ function App() {
             Insira os valores abaixo para realizar os cálculos e obter a dosagem
             de concreto de acordo com Método IPT/EPUSP.
           </p>
-          <Button variant="outline-primary" href={Pdf}>
-            Leia o Projeto
+          <Button variant="outline-primary" href={Pdf} target="_blank">
+            Leia o Projeto <BsBoxArrowUpRight className="mb-1" />
           </Button>
           <Button
             variant="outline-secondary"
