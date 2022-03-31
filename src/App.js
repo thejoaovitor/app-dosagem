@@ -24,6 +24,7 @@ import {
   Legend,
 } from "chart.js";
 import { Scatter } from "react-chartjs-2";
+import Pdf from "./PG - App Dosagem.pdf";
 
 ChartJS.register(
   CategoryScale,
@@ -514,15 +515,22 @@ function App() {
         </Navbar>
         <Container className="my-5" style={{ maxWidth: 960 }}>
           <p>
-            Método IPT-USP, projeto de Graduação de Engenharia Civil -
-            Universidade Federal do Espirito Santo.
+            Insira os valores abaixo para realizar os cálculos e obter a dosagem
+            de concreto de acordo com Método IPT/EPUSP.
           </p>
-          <Button variant="outline-secondary" onClick={populateDemoValues}>
+          <Button variant="outline-primary" href={Pdf}>
+            Leia o Projeto
+          </Button>
+          <Button
+            variant="outline-secondary"
+            className="mx-1"
+            onClick={populateDemoValues}
+          >
             Adicionar Valores Demonstração
           </Button>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="my-4">
-              <h3>Ensaio 1</h3>
+              <h3>Traço Experimental 1</h3>
               <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="m1">
                   <Form.Label>Traço</Form.Label>
@@ -552,7 +560,7 @@ function App() {
                       inputMode="decimal"
                       min="0.01"
                       step="any"
-                      max="5"
+                      max="1"
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
@@ -599,7 +607,7 @@ function App() {
             </Row>
 
             <Row className="my-4">
-              <h3>Ensaio 2</h3>
+              <h3>Traço Experimental 2</h3>
               <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="m2">
                   <Form.Label>Traço</Form.Label>
@@ -629,7 +637,7 @@ function App() {
                       inputMode="decimal"
                       min="0.01"
                       step="any"
-                      max="5"
+                      max="1"
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
@@ -676,7 +684,7 @@ function App() {
             </Row>
 
             <Row className="my-4">
-              <h3>Ensaio 3</h3>
+              <h3>Traço Experimental 3</h3>
               <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="m3">
                   <Form.Label>Traço</Form.Label>
@@ -706,7 +714,7 @@ function App() {
                       inputMode="decimal"
                       min="0.01"
                       step="any"
-                      max="5"
+                      max="1"
                     />
                     <InputGroup.Text>kg/kg</InputGroup.Text>
                   </InputGroup>
@@ -999,7 +1007,7 @@ function App() {
                 variant="primary"
                 type="submit"
                 size="lg"
-                className="mx-auto"
+                className="mx-auto mt-4"
               >
                 Calcular
               </Button>
@@ -1177,6 +1185,11 @@ function App() {
               </Card.Body>
             </Card>
           )}
+          <p className="mt-4">
+            Projeto de Graduação de Engenharia Civil - Universidade Federal do
+            Espirito Santo. {"\n"} Autores: João Vitor Bortolotti e Yasmin dos
+            Reis Batisa. {"\n"} Orientador: Prof. Dr. Ronaldo Pilar
+          </p>
         </Container>
       </div>
     </div>
