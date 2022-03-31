@@ -590,7 +590,7 @@ function App() {
 
               <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="me1">
-                  <Form.Label>Massa Específica</Form.Label>
+                  <Form.Label>Massa Esp. Concreto</Form.Label>
                   <InputGroup>
                     <Form.Control
                       placeholder="0.0"
@@ -667,7 +667,7 @@ function App() {
 
               <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="me2">
-                  <Form.Label>Massa Específica</Form.Label>
+                  <Form.Label>Massa Esp. Concreto</Form.Label>
                   <InputGroup>
                     <Form.Control
                       placeholder="0.0"
@@ -744,7 +744,7 @@ function App() {
 
               <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="me3">
-                  <Form.Label>Massa Específica</Form.Label>
+                  <Form.Label>Massa Esp. Concreto</Form.Label>
                   <InputGroup>
                     <Form.Control
                       placeholder="0.0"
