@@ -24,7 +24,7 @@ import {
   Legend,
 } from "chart.js";
 import { Scatter } from "react-chartjs-2";
-import Pdf from "./PG - App Dosagem.pdf";
+import Pdf from "./PG - Calc Dosagem de Concreto IPT:EPUSP.pdf";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 
 ChartJS.register(
