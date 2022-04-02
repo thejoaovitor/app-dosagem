@@ -514,27 +514,29 @@ function App() {
             <p>Calculadora de Dosagem de Concreto</p>
           </Container>
         </Navbar>
-        <Container className="my-5" style={{ maxWidth: 960 }}>
+        <Container className="my-4" style={{ maxWidth: 960 }}>
           <p>
             Insira os valores abaixo para realizar os cálculos e obter a dosagem
             de concreto de acordo com Método IPT/EPUSP.
           </p>
-          <Button variant="outline-primary" href={Pdf} target="_blank">
-            Leia o Projeto <BsBoxArrowUpRight className="mb-1" />
-          </Button>
-          <Button
-            variant="outline-secondary"
-            className="mx-1"
-            onClick={populateDemoValues}
-          >
-            Adicionar Valores Demonstração
-          </Button>
+          <Row>
+            <Col xs={12} sm="auto" className="mt-1">
+              <Button variant="outline-primary" href={Pdf} target="_blank">
+                Leia o Projeto <BsBoxArrowUpRight className="mb-1" />
+              </Button>
+            </Col>
+            <Col className="mt-1">
+              <Button variant="outline-secondary" onClick={populateDemoValues}>
+                Adicionar Valores Demonstração
+              </Button>
+            </Col>
+          </Row>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="my-4">
               <h3>Traço Experimental 1</h3>
               <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="m1">
-                  <Form.Label>Traço</Form.Label>
+                  <Form.Label>Traço (m)</Form.Label>
                   <InputGroup>
                     <InputGroup.Text>1 : </InputGroup.Text>
                     <Form.Control
@@ -611,7 +613,7 @@ function App() {
               <h3>Traço Experimental 2</h3>
               <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="m2">
-                  <Form.Label>Traço</Form.Label>
+                  <Form.Label>Traço (m)</Form.Label>
                   <InputGroup>
                     <InputGroup.Text>1 : </InputGroup.Text>
                     <Form.Control
@@ -688,7 +690,7 @@ function App() {
               <h3>Traço Experimental 3</h3>
               <Col xs={6} md={3} className="mt-2">
                 <Form.Group controlId="m3">
-                  <Form.Label>Traço</Form.Label>
+                  <Form.Label>Traço (m)</Form.Label>
                   <InputGroup>
                     <InputGroup.Text>1 : </InputGroup.Text>
                     <Form.Control
@@ -1186,11 +1188,13 @@ function App() {
               </Card.Body>
             </Card>
           )}
-          <p className="mt-4">
-            Projeto de Graduação de Engenharia Civil - Universidade Federal do
-            Espirito Santo. {"\n"} Autores: João Vitor Bortolotti e Yasmin dos
-            Reis Batisa. {"\n"} Orientador: Prof. Dr. Ronaldo Pilar
-          </p>
+          <small>
+            <p className="mt-4 text-secondary">
+              Projeto de Graduação de Engenharia Civil - Universidade Federal do
+              Espirito Santo. {"\n"} Autores: João Vitor Bortolotti e Yasmin dos
+              Reis Batisa. {"\n"} Orientador: Prof. Dr. Ronaldo Pilar
+            </p>
+          </small>
         </Container>
       </div>
     </div>
